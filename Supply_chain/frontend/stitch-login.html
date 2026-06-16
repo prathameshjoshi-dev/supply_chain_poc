@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Nexus Logistics Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #dee4e4;
+            overflow: hidden;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.75);
+        }
+        .input-focus-ring:focus {
+            outline: none;
+            border-color: #59d8e0;
+            box-shadow: 0 0 0 4px rgba(28, 176, 184, 0.2);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .network-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 10s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#59d8e0",
+                      "on-secondary-container": "#adb4ce",
+                      "secondary-container": "#3f465c",
+                      "surface": "#0f1415",
+                      "background": "#0f1415",
+                      "tertiary-fixed": "#ffdbc9",
+                      "on-error": "#690005",
+                      "on-secondary": "#283044",
+                      "tertiary": "#ffb68b",
+                      "error-container": "#93000a",
+                      "primary-fixed": "#79f5fd",
+                      "on-tertiary-fixed-variant": "#753400",
+                      "surface-container-low": "#171d1d",
+                      "surface-container-high": "#252b2b",
+                      "border-subtle": "rgba(255, 255, 255, 0.1)",
+                      "secondary": "#bec6e0",
+                      "on-tertiary-fixed": "#321200",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "on-surface": "#dee4e4",
+                      "primary-container": "#1cb0b8",
+                      "on-tertiary": "#522300",
+                      "on-primary-fixed-variant": "#004f53",
+                      "surface-container": "#1b2121",
+                      "surface-variant": "#303636",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#0f1415",
+                      "on-tertiary-container": "#5b2700",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-lowest": "#090f10",
+                      "surface-bright": "#343a3b",
+                      "tertiary-container": "#e4884d",
+                      "on-primary-container": "#003d40",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-background": "#dee4e4",
+                      "primary": "#59d8e0",
+                      "secondary-fixed": "#dae2fd",
+                      "background-deep": "#0F172A",
+                      "on-primary": "#00373a",
+                      "status-critical": "#EF4444",
+                      "inverse-primary": "#00696e",
+                      "primary-fixed-dim": "#59d8e0",
+                      "status-warning": "#F59E0B",
+                      "on-secondary-fixed": "#131b2e",
+                      "outline": "#869394",
+                      "on-primary-fixed": "#002022",
+                      "surface-container-highest": "#303636",
+                      "outline-variant": "#3d494a",
+                      "on-surface-variant": "#bcc9ca",
+                      "status-success": "#10B981",
+                      "surface-glass": "rgba(30, 41, 59, 0.7)",
+                      "inverse-surface": "#dee4e4",
+                      "tertiary-fixed-dim": "#ffb68b",
+                      "inverse-on-surface": "#2c3132"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "base": "8px",
+                      "margin-desktop": "32px",
+                      "gutter": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "headline-sm": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Outfit"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Outfit"],
+                      "mono-md": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="relative min-h-screen flex items-center justify-center font-body-md text-body-md overflow-hidden bg-background-deep">
+<!-- Background Animation Layer -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(89,216,224,0.08),transparent_70%)]"></div>
+<!-- Abstract Supply Chain Graphic Overlay -->
+<svg class="absolute w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="lineGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#59d8e0" stop-opacity="0"></stop>
+<stop offset="50%" stop-color="#59d8e0" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#59d8e0" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<g fill="none" stroke="url(#lineGrad)" stroke-width="1.5">
+<path class="network-line" d="M-100 200 Q 200 100 500 300 T 1200 150" style="animation-duration: 15s"></path>
+<path class="network-line" d="M-200 600 Q 400 400 800 600 T 1500 400" style="animation-duration: 22s"></path>
+<path class="network-line" d="M-50 800 Q 300 900 600 700 T 1300 850" style="animation-duration: 18s"></path>
+</g>
+<!-- Node pulses -->
+<circle class="animate-pulse" cx="500" cy="300" fill="#59d8e0" r="4"></circle>
+<circle class="animate-pulse" cx="800" cy="600" fill="#59d8e0" r="3" style="animation-delay: 1s"></circle>
+<circle class="animate-pulse" cx="600" cy="700" fill="#59d8e0" r="5" style="animation-delay: 2s"></circle>
+</svg>
+<!-- Dynamic Blurred Shapes -->
+<div class="absolute top-[-10%] left-[-5%] w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[120px] animate-float"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-[35vw] h-[35vw] bg-secondary/5 rounded-full blur-[100px] animate-float" style="animation-delay: -3s"></div>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-[480px] px-margin-mobile md:px-0">
+<div class="glass-card p-8 md:p-12 rounded-xl shadow-xl transition-all duration-300">
+<!-- Brand Logo & Header -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2 tracking-tight">Nexus Logistics</h1>
+<p class="font-body-md text-on-surface-variant">Intelligence Platform Access</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="email">Corporate Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">alternate_email</span>
+<input class="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all" id="email" placeholder="operator@nexus.logistics" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="password">Access Key</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-fixed transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">lock</span>
+<input class="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-12 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all" id="password" placeholder="••••••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="w-4 h-4 rounded border-border-subtle bg-surface-container-low text-primary focus:ring-primary focus:ring-offset-background-deep" id="remember" type="checkbox"/>
+<label class="ml-3 font-body-md text-on-surface-variant cursor-pointer select-none" for="remember">Remember this station</label>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary py-4 rounded-lg font-label-md text-label-md text-on-primary-container uppercase tracking-widest font-bold shadow-lg shadow-primary/20 hover:bg-primary-fixed-dim active:scale-[0.98] transition-all">
+                    Sign In
+                </button>
+</form>
+<!-- SSO Partition -->
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-border-subtle"></div>
+</div>
+<div class="relative flex justify-center text-label-md font-label-md uppercase tracking-widest text-outline/60 bg-transparent px-4">
+<span class="bg-[#1e293b]/50 px-4">Or continue with</span>
+</div>
+</div>
+<!-- SSO Buttons -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high border border-border-subtle rounded-lg hover:bg-surface-variant transition-colors group">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-on-surface-variant font-label-md group-hover:text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high border border-border-subtle rounded-lg hover:bg-surface-variant transition-colors group">
+<svg class="w-5 h-5" viewbox="0 0 23 23">
+<path d="M0 0h11v11H0z" fill="#f3f3f3"></path>
+<path d="M12 0h11v11H12z" fill="#f3f3f3"></path>
+<path d="M0 12h11v11H0z" fill="#f3f3f3"></path>
+<path d="M12 12h11v11H12z" fill="#f3f3f3"></path>
+</svg>
+<span class="text-on-surface-variant font-label-md group-hover:text-on-surface">Azure AD</span>
+</button>
+</div>
+</div>
+<!-- Footer Links -->
+<footer class="mt-8 flex justify-between px-2">
+<div class="flex gap-6">
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="font-label-md text-label-md text-outline/40">
+                v2.4.0-Stable
+            </div>
+</footer>
+</main>
+<!-- Data-Alt Asset Mock (Image Placeholder Requirement) -->
+<!-- Note: Though this is a login screen, we include one illustrative background element or icon as per instructions -->
+<div class="hidden">
+<img data-alt="A cinematic, high-technology digital visualization of a global logistics network. Glowing nodes represent major cities connected by pulsing light pathways across a deep navy blue stylized map. The aesthetic is clean, sophisticated, and authoritative, utilizing a primary teal and dark sapphire color palette. Soft lens flares and a shallow depth of field create a professional, enterprise-grade data orchestration atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnW7aNXoMf7MT03URQAckIxfdHvZT5S2JZiHfP3-n73TLIAZU-txTP5XzCJWpZv2yAvOyGNN_YOsmp5e4Sg339uHSWeaQEQX1pl470S38omkelfxeGyH3htofXWqbpVrRJl-4m9ny-_QBzylNgNjP7RbIqrwsRaT4yd_TDiEEGMP4Upt5DJOVPtUgWz_7tuiuS0RcVEPIEsv-In7M4lQrhiRpGe4dbWcP9BXMI3bQLe_eq8mGN00Kyh-Jk8RPgqh--fD5zGJYipNU"/>
+</div>
+<script>
+        // Micro-interactions for input fields
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = '#59d8e0';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = '';
+            });
+        });
+
+        // Simple button active state animation
+        const loginBtn = document.querySelector('button.bg-primary');
+        loginBtn.addEventListener('mousedown', () => {
+            loginBtn.style.transform = 'scale(0.98)';
+        });
+        loginBtn.addEventListener('mouseup', () => {
+            loginBtn.style.transform = 'scale(1)';
+        });
+    </script>
+</body></html>
