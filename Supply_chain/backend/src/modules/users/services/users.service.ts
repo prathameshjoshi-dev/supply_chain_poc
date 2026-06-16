@@ -31,8 +31,32 @@ export class UsersService {
     return result;
   }
 
-  async findAll() {
-    return this.userModel.find().select('-passwordHash').exec();
+  async findAll(query: any = {}) {
+    const { page = 1, limit = 10, search, role, warehouseScope } = query;
+    const filter: any = {};
+
+    if (search) {
+      filter.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+      ];
+    }
+    if (role && role !== 'All Roles') filter.role = role.toLowerCase();
+    if (warehouseScope && warehouseScope !== 'All Scopes') filter.warehouseScope = warehouseScope;
+
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await Promise.all([
+      this.userModel.find(filter).select('-passwordHash').skip(skip).limit(Number(limit)).exec(),
+      this.userModel.countDocuments(filter),
+    ]);
+
+    return {
+      data,
+      total,
+      page: Number(page),
+      limit: Number(limit),
+    };
   }
 
   async findOne(id: string) {
@@ -73,6 +97,30 @@ export class UsersService {
       throw new NotFoundException(`User #${id} not found`);
     }
     return deletedUser;
+  }
+
+  async bulkAction(userIds: string[], action: string) {
+    if (action === 'delete' || action === 'suspend') {
+      const result = await this.userModel.updateMany(
+        { _id: { $in: userIds } },
+        { $set: { status: 'inactive' } }
+      ).exec();
+      return { modifiedCount: result.modifiedCount };
+    }
+    return { modifiedCount: 0 };
+  }
+
+  async getInsights() {
+    const totalCount = await this.userModel.countDocuments();
+    const adminCount = await this.userModel.countDocuments({ role: 'admin' });
+    const activeCount = await this.userModel.countDocuments({ status: 'active' });
+    const activePercentage = totalCount > 0 ? Math.round((activeCount / totalCount) * 100) : 0;
+    
+    return {
+      totalCapacity: totalCount,
+      adminAccounts: adminCount,
+      activePercentage,
+    };
   }
 
   // Inter-module method used by Auth service

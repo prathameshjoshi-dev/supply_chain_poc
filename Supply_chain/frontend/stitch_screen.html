@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Logistics | User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#79f5fd",
+                        "outline-variant": "#3d494a",
+                        "surface-glass": "rgba(30, 41, 59, 0.7)",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#003d40",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "surface": "#0f1415",
+                        "primary-fixed-dim": "#59d8e0",
+                        "on-primary-fixed-variant": "#004f53",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "tertiary-container": "#e4884d",
+                        "on-surface-variant": "#bcc9ca",
+                        "secondary-fixed": "#dae2fd",
+                        "surface-container-low": "#171d1d",
+                        "on-secondary": "#283044",
+                        "surface-container": "#1b2121",
+                        "secondary-container": "#3f465c",
+                        "status-warning": "#F59E0B",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "inverse-primary": "#00696e",
+                        "outline": "#869394",
+                        "on-error": "#690005",
+                        "background-deep": "#0F172A",
+                        "primary": "#59d8e0",
+                        "secondary": "#bec6e0",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#2c3132",
+                        "surface-container-high": "#252b2b",
+                        "background": "#0f1415",
+                        "tertiary": "#ffb68b",
+                        "surface-dim": "#0f1415",
+                        "border-subtle": "rgba(255, 255, 255, 0.1)",
+                        "surface-tint": "#59d8e0",
+                        "status-critical": "#EF4444",
+                        "on-tertiary-container": "#5b2700",
+                        "surface-container-highest": "#303636",
+                        "primary-container": "#1cb0b8",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-container-lowest": "#090f10",
+                        "inverse-surface": "#dee4e4",
+                        "on-primary": "#00373a",
+                        "on-primary-fixed": "#002022",
+                        "on-background": "#dee4e4",
+                        "surface-bright": "#343a3b",
+                        "on-tertiary-fixed": "#321200",
+                        "on-tertiary": "#522300",
+                        "on-surface": "#dee4e4",
+                        "status-success": "#10B981",
+                        "surface-variant": "#303636",
+                        "on-secondary-container": "#adb4ce",
+                        "tertiary-fixed": "#ffdbc9",
+                        "secondary-fixed-dim": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "margin-desktop": "32px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "mono-md": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #dee4e4;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.75);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(89, 216, 224, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(89, 216, 224, 0.4);
+        }
+        .status-pill {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary/30">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-surface-container-low backdrop-blur-xl border-r border-border-subtle w-64 shadow-xl">
+<div class="p-6">
+<h1 class="font-headline-sm text-headline-sm font-black text-primary tracking-tight">Nexus Control</h1>
+<p class="text-[10px] font-label-md text-on-surface-variant/60 uppercase tracking-widest mt-1">Enterprise Logistics</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">local_shipping</span>
+<span class="font-label-md text-label-md">Shipments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">account_tree</span>
+<span class="font-label-md text-label-md">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary/70 group-hover:text-primary">smart_toy</span>
+<span class="font-label-md text-label-md">AI Assistant</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">User Profile</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen relative overflow-hidden">
+<!-- Background Shader/Atmosphere -->
+
+<!-- Top Header Bar -->
+<header class="h-16 flex justify-between items-center px-margin-desktop bg-surface-glass backdrop-blur-md border-b border-border-subtle sticky top-0 z-50 shadow-sm">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">User Management</h2>
+<div class="h-6 w-[1px] bg-border-subtle hidden md:block"></div>
+<nav class="hidden md:flex gap-6">
+<a class="text-primary font-bold border-b-2 border-primary py-5" href="#">Operators</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors py-5" href="#">Permissions</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors py-5" href="#">Audit Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Search operators..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-variant hover:bg-surface-variant/80 transition-transform active:scale-90 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface-variant"></span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a logistics operator wearing a modern tech-integrated headset, set against a background of glowing blue digital data screens. The lighting is sharp and cinematic, reflecting a high-tech command center environment with deep navy and cyan tones consistent with the Nexus brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFQ16N8sErzmW_sSykfGhWxclaxb8CHAjwqs1zsjHUTmMEuDLctLyVrIzIcv_EcN1Qil1AlFIoVWfDElTAo7NFlzd8a1Dv2whPiDWJa21fr_TW3qcydpsboX4KdzktFxHNO0puycKbd-YxbEtYI5wJlZMRii6YJ0_g5bV2UgD2-5ouOtlRfc9iWSkUbSG1PnIkBNbUUqAZgL8wCZunp9EUU2E7gmlun6FZwsUsqzPpVKci1YkzvC_pNHNPW4WP5hf--p0YXwRiDqM"/>
+</div>
+</div>
+</header>
+<!-- Viewport Container -->
+<div class="p-margin-desktop space-y-gutter max-w-container-max mx-auto">
+<!-- Quick Actions & Filters Bar -->
+<div class="flex flex-col md:flex-row gap-4 justify-between items-end">
+<div class="grid grid-cols-2 md:flex gap-4 w-full md:w-auto">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider ml-1">Filter by Role</label>
+<select class="bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-sm text-on-surface focus:ring-primary focus:border-primary appearance-none min-w-[140px]">
+<option>All Roles</option>
+<option>Admin</option>
+<option>Manager</option>
+<option>Viewer</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-label-md text-on-surface-variant uppercase tracking-wider ml-1">Warehouse Scope</label>
+<select class="bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-sm text-on-surface focus:ring-primary focus:border-primary appearance-none min-w-[140px]">
+<option>All Scopes</option>
+<option>Global</option>
+<option>Regional</option>
+<option>Hub 42-X</option>
+</select>
+</div>
+</div>
+<div class="flex gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border-subtle text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="font-label-md">More Filters</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span class="font-label-md">Invite User</span>
+</button>
+</div>
+</div>
+<!-- Main Data Table Section -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col shadow-xl">
+<!-- Bulk Actions Toolbar -->
+<div class="px-6 py-4 bg-primary/5 flex items-center justify-between border-b border-border-subtle">
+<div class="flex items-center gap-4">
+<input class="rounded bg-surface-container border-outline text-primary focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+<span class="text-sm font-medium text-primary">3 Users Selected</span>
+<div class="h-4 w-[1px] bg-border-subtle"></div>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-variant rounded text-on-surface-variant" title="Bulk Edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 hover:bg-surface-variant rounded text-on-surface-variant" title="Bulk Suspend">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+<button class="p-1.5 hover:bg-error-container/20 rounded text-error" title="Bulk Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="text-on-surface-variant text-xs italic">
+                        Displaying 24 of 1,208 total operators
+                    </div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 text-on-surface-variant border-b border-border-subtle">
+<th class="px-6 py-4 w-12"></th>
+<th class="px-6 py-4 font-label-md text-[10px] uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">
+                                    Operator <span class="material-symbols-outlined text-[12px] align-middle ml-1">expand_more</span>
+</th>
+<th class="px-6 py-4 font-label-md text-[10px] uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Role</th>
+<th class="px-6 py-4 font-label-md text-[10px] uppercase tracking-widest">Warehouse Scope</th>
+<th class="px-6 py-4 font-label-md text-[10px] uppercase tracking-widest">Last Activity</th>
+<th class="px-6 py-4 font-label-md text-[10px] uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-variant/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded bg-surface-container border-outline text-primary focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center font-bold text-primary overflow-hidden">
+<img alt="AS" class="w-full h-full object-cover" data-alt="A detailed, hyper-realistic close-up portrait of a senior logistics manager with silver hair, wearing a sleek slate-grey uniform. The lighting is dramatic and moody, casting soft shadows that highlight professionalism and experience. The background features a blurred, high-contrast digital map of global shipping lanes in deep teal and cyan." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDKysXaHRlq7itjokivIERy7uPtLk70eVQ-l95T9Hx_1VBVQfwX58PTYxB-_0p_S-Xa8NbBnrEh6Ac8mWj2BC6a9BBPIftAEZ0j4DVgFRUWbUJybY4_kX-sTcGD_eoT5e5X6572wq_M5-RvDK8-kh8qvV7vTDzgr14b1ehvA7NQ9TIpW2Ej9ltDbEc5YOq4JSX5hhdLlko3kCpynJAl4P84ePwUCX-oGUj33LtKxAtmlOW7vGdEczK4ViLjg9d3YMt-9hgoan9RYA"/>
+</div>
+<div>
+<div class="font-medium text-on-surface">Alex Sterling</div>
+<div class="text-xs text-on-surface-variant">a.sterling@nexus-logistics.ai</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                                        Admin
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">public</span>
+<span>Global</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-mono-md">
+                                    2 mins ago
+                                </td>
+<td class="px-6 py-4">
+<span class="status-pill bg-status-success/20 text-status-success border border-status-success/30">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-variant/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded bg-surface-container border-outline text-primary focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center font-bold text-secondary overflow-hidden">
+<img alt="JK" class="w-full h-full object-cover" data-alt="A portrait of a young female technical specialist in a tech-forward warehouse environment. She has short, styled hair and wears a professional navy uniform with subtle glowing elements. The atmosphere is energetic and focused, with soft background bokeh from warehouse robotic units and high-key, modern architectural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuby78CAxMwU0ShD8ZqY_eJNrYdT8MZA0sITU4ebBqawYRMEj3Knx_zMuqynzT9vG5hIZzMySln9U0jGqLCQFFU5x0ThuYw8kjHeZF946xVOjnTXNy_ShbEmO_-TdXgFMd3ey9rpjqIbia3_vzy79HgBkj_KHldM27Ilb6yzwzKFMlwCVGqzFRqjhhXQ5TqitzcwU55n9sNrBtFw_EkLQN3MEK0y1haGU27-LH278s3WlvIdk48Z7SuwMWa_4W3qh5tALKio1DzR8"/>
+</div>
+<div>
+<div class="font-medium text-on-surface">Jordan Kaine</div>
+<div class="text-xs text-on-surface-variant">j.kaine@nexus-logistics.ai</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-tertiary/10 text-tertiary border border-tertiary/20">
+                                        Manager
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-tertiary">location_on</span>
+<span>EMEA Region</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-mono-md">
+                                    45 mins ago
+                                </td>
+<td class="px-6 py-4">
+<span class="status-pill bg-status-success/20 text-status-success border border-status-success/30">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Inactive) -->
+<tr class="group hover:bg-surface-variant/30 transition-colors opacity-75">
+<td class="px-6 py-4">
+<input checked="" class="rounded bg-surface-container border-outline text-primary focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-on-surface-variant/20 flex items-center justify-center font-bold text-on-surface-variant overflow-hidden">
+<img alt="MV" class="w-full h-full object-cover" data-alt="A high-quality digital illustration of an older male operator in a command center, featuring sharp lighting and a dark, professional aesthetic. The subject is wearing a tactical-style headset. Behind him, translucent screens display complex logistics network data, emphasizing the tech-forward, dark-mode-first visual language of Nexus Logistics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5kVtYTmcFy3VZyNYNQca0bBwFQC1m-4LsSSaldfMZxRC9j5wEV2MlCAo2Sfiwv4cD-MWHMQlGKZvToEFD9HduiXvkKNK0PF9-KWkXRtvsrW-kvQBaRb52NJjddNwXe_NItY3WeizBz9bJndbsm__tbsOQN6YDly8wS-ohS841JiFy6EiF0UbZBZEdXAOoShy3pypcmjRBCJIES7WRA8x4vAWbzHXbcWouifHmRoQj3CwVEcxm-TZGqnWCb8EvONa7v35RctZewq8"/>
+</div>
+<div>
+<div class="font-medium text-on-surface">Marcus Vane</div>
+<div class="text-xs text-on-surface-variant">m.vane@nexus-logistics.ai</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-surface-variant text-on-surface-variant border border-border-subtle">
+                                        Viewer
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">warehouse</span>
+<span>Hub 42-X (Berlin)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-mono-md">
+                                    12 days ago
+                                </td>
+<td class="px-6 py-4">
+<span class="status-pill bg-on-surface-variant/20 text-on-surface-variant border border-border-subtle">Inactive</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-border-subtle flex items-center justify-between bg-surface-container-low/30">
+<div class="text-sm text-on-surface-variant">
+                        Showing <span class="text-on-surface">1</span> to <span class="text-on-surface">10</span> of <span class="text-on-surface">24</span> results
+                    </div>
+<div class="flex gap-1">
+<button class="px-3 py-1.5 rounded bg-surface-variant text-on-surface-variant hover:text-on-surface disabled:opacity-50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary font-bold">1</button>
+<button class="px-3 py-1.5 rounded bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors">2</button>
+<button class="px-3 py-1.5 rounded bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors">3</button>
+<button class="px-3 py-1.5 rounded bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role Insights (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="glass-card p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
+<div class="text-[10px] font-label-md text-primary uppercase tracking-[0.2em] mb-2">Total Capacity</div>
+<div class="font-display-lg text-display-lg text-on-surface">1,208</div>
+<div class="flex items-center gap-1 mt-2 text-status-success text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        +12% this month
+                    </div>
+</div>
+<div class="glass-card p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
+<div class="text-[10px] font-label-md text-tertiary uppercase tracking-[0.2em] mb-2">Admin Accounts</div>
+<div class="font-display-lg text-display-lg text-on-surface">42</div>
+<div class="text-xs text-on-surface-variant mt-2 font-medium">3.5% of workforce</div>
+</div>
+<div class="glass-card p-6 rounded-xl col-span-1 md:col-span-2 flex items-center justify-between border-primary/20">
+<div class="space-y-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Security Pulse</h4>
+<p class="text-xs text-on-surface-variant">System-wide permission check completed successfully.</p>
+<button class="mt-4 text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+                            View Audit History <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="w-24 h-24 relative flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle cx="48" cy="48" fill="transparent" r="40" stroke="rgba(255, 255, 255, 0.05)" stroke-width="8"></circle>
+<circle cx="48" cy="48" fill="transparent" r="40" stroke="#59d8e0" stroke-dasharray="251.2" stroke-dashoffset="30" stroke-width="8"></circle>
+</svg>
+<span class="absolute text-lg font-bold text-primary">88%</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hover effect for table rows
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.transform = 'translateX(4px)';
+                });
+                row.addEventListener('mouseleave', () => {
+                    row.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Smooth sorting toggle simulation
+            const sortableHeaders = document.querySelectorAll('th.cursor-pointer');
+            sortableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const icon = header.querySelector('.material-symbols-outlined');
+                    icon.textContent = icon.textContent === 'expand_more' ? 'expand_less' : 'expand_more';
+                });
+            });
+        });
+    </script>
+</body></html>

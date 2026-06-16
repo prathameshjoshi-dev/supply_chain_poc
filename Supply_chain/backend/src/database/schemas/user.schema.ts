@@ -20,6 +20,15 @@ export class User {
   @Prop({ type: [String], default: [] })
   warehouseIds: string[];
 
+  @Prop()
+  warehouseScope: string;
+
+  @Prop()
+  avatar: string;
+
+  @Prop()
+  lastActivity: Date;
+
   @Prop({ default: 'active', enum: ['active', 'inactive'] })
   status: string;
 }

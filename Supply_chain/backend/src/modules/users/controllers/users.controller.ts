@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { BulkActionDto } from '../dto/bulk-action.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/v1/users')
@@ -16,8 +17,18 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query() query: any) {
+    return this.usersService.findAll(query);
+  }
+
+  @Get('insights')
+  getInsights() {
+    return this.usersService.getInsights();
+  }
+
+  @Post('bulk-action')
+  bulkAction(@Body() bulkActionDto: BulkActionDto) {
+    return this.usersService.bulkAction(bulkActionDto.userIds, bulkActionDto.action);
   }
 
   @Get(':id')

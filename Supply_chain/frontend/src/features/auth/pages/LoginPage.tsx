@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useLoginMutation, useSsoLoginMutation } from '../api/authApi';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setCredentials } from '../slices/authSlice';
+import { jwtDecode } from 'jwt-decode';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,13 +13,24 @@ export const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [login, { isLoading, error }] = useLoginMutation();
   const [ssoLogin, { isLoading: isSsoLoading }] = useSsoLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const result = await ssoLogin({ provider: 'google', code: tokenResponse.access_token }).unwrap();
         console.log('Google login successful:', result);
-        // Store token, redirect
+        
+        // Decode token to get user info
+        const payload: any = jwtDecode(result.data.accessToken);
+        
+        dispatch(setCredentials({ 
+          user: { _id: payload.sub, email: payload.email, role: payload.role }, 
+          token: result.data.accessToken 
+        }));
+        
+        navigate('/users');
       } catch (err) {
         console.error('Google login failed:', err);
       }
@@ -30,7 +45,16 @@ export const LoginPage: React.FC = () => {
     try {
       const result = await login({ email, password }).unwrap();
       console.log('Login successful:', result);
-      // Store token, redirect
+      
+      // Decode token to get user info
+      const payload: any = jwtDecode(result.data.accessToken);
+      
+      dispatch(setCredentials({ 
+        user: { _id: payload.sub, email: payload.email, role: payload.role }, 
+        token: result.data.accessToken 
+      }));
+      
+      navigate('/users');
     } catch (err) {
       console.error('Login failed:', err);
     }

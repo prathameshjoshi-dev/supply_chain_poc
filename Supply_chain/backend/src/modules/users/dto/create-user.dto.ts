@@ -20,4 +20,12 @@ export class CreateUserDto {
   @IsArray()
   @IsOptional()
   warehouseIds?: string[];
+
+  @IsString()
+  @IsOptional()
+  warehouseScope?: string;
+
+  @IsString()
+  @IsOptional()
+  avatar?: string;
 }

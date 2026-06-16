@@ -93,7 +93,7 @@ export class AuthService {
       const createdUser = new this.userModel({
         name: payload.name || payload.email.split('@')[0],
         email: payload.email,
-        passwordHash: '', // No password for SSO users
+        passwordHash: 'SSO_USER_NO_PASSWORD', // Mongoose requires a non-empty string
         role: 'viewer', // Default role
         warehouseIds: [],
         status: 'active',
