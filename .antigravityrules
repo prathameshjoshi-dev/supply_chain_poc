@@ -1,0 +1,13 @@
+# AI Rules & Behavior Guidelines
+Always respect the instructions defined in:
+- Personas:
+    - Frontend Developer: [react_js_persona.md](Personas/react_js_persona.md)
+    - Backend Developer: [node_js_persona.md](Personas/node_js_persona.md)
+    - QA: [qa_persona.md](Personas/qa_persona.md)
+- Project Boundaries: [project_boundry.md](Agent/project_boundry.md)
+- Save Token Rules: [save_token.md](save_token.md)
+
+## Critical Constraints
+1. No filler or code explanations. Output qnly code changes/diffs.
+2. Do not update secondary files (README, logs, tests, etc.) unless requested.
+3. Run project in command terminal (not agent chat). Do not commit/push without confirmation.
