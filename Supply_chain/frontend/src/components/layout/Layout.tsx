@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../store';
 import { logout } from '../../features/auth/slices/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { ChangePasswordModal } from '../../features/auth/components/ChangePasswordModal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const { user } = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
@@ -69,6 +71,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
           </a>
         </nav>
         <div className="p-4 border-t border-border-subtle space-y-1">
+          <button 
+            onClick={() => setIsChangePasswordOpen(true)}
+            className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group"
+          >
+            <span className="material-symbols-outlined">key</span>
+            <span className="font-label-md text-label-md">Change Password</span>
+          </button>
           <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-all rounded-lg group">
             <span className="material-symbols-outlined">logout</span>
             <span className="font-label-md text-label-md">Logout</span>
@@ -124,6 +133,12 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
           {children}
         </div>
       </main>
+
+      {/* Modals */}
+      <ChangePasswordModal 
+        isOpen={isChangePasswordOpen} 
+        onClose={() => setIsChangePasswordOpen(false)} 
+      />
     </div>
   );
 };

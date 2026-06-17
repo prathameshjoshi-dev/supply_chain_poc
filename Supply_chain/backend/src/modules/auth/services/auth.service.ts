@@ -42,6 +42,23 @@ export class AuthService {
     };
   }
 
+  async changePassword(email: string, currentPassword: string, newPassword: string) {
+    const user = await this.userModel.findOne({ email }).exec();
+    if (!user || !user.passwordHash) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!isMatch) {
+      throw new BadRequestException('Incorrect current password');
+    }
+
+    user.passwordHash = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    return { success: true };
+  }
+
   async refreshToken(token: string) {
     try {
       const payload = this.jwtService.verify(token);

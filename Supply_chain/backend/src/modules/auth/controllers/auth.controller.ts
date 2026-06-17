@@ -1,6 +1,7 @@
 import { Controller, Post, Body, HttpCode, HttpStatus, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { LoginDto, RefreshDto } from '../dto/auth.dto';
+import { ChangePasswordDto } from '../dto/change-password.dto';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -43,6 +44,16 @@ export class AuthController {
     return {
       status: 'success',
       data,
+    };
+  }
+
+  @Post('change-password')
+  @HttpCode(HttpStatus.OK)
+  async changePassword(@Body() dto: ChangePasswordDto) {
+    await this.authService.changePassword(dto.email, dto.currentPassword, dto.newPassword);
+    return {
+      status: 'success',
+      message: 'Password updated successfully'
     };
   }
 }

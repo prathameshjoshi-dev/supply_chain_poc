@@ -18,7 +18,14 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: '/change-password',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useSsoLoginMutation } = authApi;
+export const { useLoginMutation, useSsoLoginMutation, useChangePasswordMutation } = authApi;
