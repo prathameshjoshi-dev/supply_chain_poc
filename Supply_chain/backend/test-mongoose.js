@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -15,7 +16,7 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 async function run() {
-  await mongoose.connect('mongodb+srv://prathameshjoshi_db_user:kRLYlKXhciFr808C@cluster0.3t3dlqx.mongodb.net/?appName=Cluster0');
+  await mongoose.connect(process.env.MONGODB_URI);
   try {
     const createdUser = new User({
       name: 'Test',
