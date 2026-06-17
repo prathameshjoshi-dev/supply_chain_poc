@@ -21,15 +21,15 @@ export const LoginPage: React.FC = () => {
       try {
         const result = await ssoLogin({ provider: 'google', code: tokenResponse.access_token }).unwrap();
         console.log('Google login successful:', result);
-        
+
         // Decode token to get user info
         const payload: any = jwtDecode(result.data.accessToken);
-        
-        dispatch(setCredentials({ 
-          user: { _id: payload.sub, email: payload.email, role: payload.role }, 
-          token: result.data.accessToken 
+
+        dispatch(setCredentials({
+          user: { _id: payload.sub, email: payload.email, role: payload.role },
+          token: result.data.accessToken
         }));
-        
+
         navigate('/users');
       } catch (err) {
         console.error('Google login failed:', err);
@@ -45,15 +45,15 @@ export const LoginPage: React.FC = () => {
     try {
       const result = await login({ email, password }).unwrap();
       console.log('Login successful:', result);
-      
+
       // Decode token to get user info
       const payload: any = jwtDecode(result.data.accessToken);
-      
-      dispatch(setCredentials({ 
-        user: { _id: payload.sub, email: payload.email, role: payload.role }, 
-        token: result.data.accessToken 
+
+      dispatch(setCredentials({
+        user: { _id: payload.sub, email: payload.email, role: payload.role },
+        token: result.data.accessToken
       }));
-      
+
       navigate('/users');
     } catch (err) {
       console.error('Login failed:', err);
@@ -70,18 +70,18 @@ export const LoginPage: React.FC = () => {
           <h1 className="font-headline-md text-headline-md text-on-surface mb-2 tracking-tight">Nexus Logistics</h1>
           <p className="font-body-md text-on-surface-variant">Intelligence Platform Access</p>
         </div>
-        
+
         <form className="space-y-6" onSubmit={handleLogin}>
           {error && <div className="text-red-500 text-sm">Login failed. Please check your credentials.</div>}
-          
+
           <div className="space-y-2">
             <label className="block font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" htmlFor="email">Corporate Email</label>
             <div className="relative group">
               <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors text-[20px]">alternate_email</span>
-              <input 
-                className="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all" 
-                id="email" 
-                placeholder="operator@nexus.logistics" 
+              <input
+                className="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all"
+                id="email"
+                placeholder="operator@nexus.logistics"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +89,7 @@ export const LoginPage: React.FC = () => {
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="block font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" htmlFor="password">Access Key</label>
@@ -97,17 +97,17 @@ export const LoginPage: React.FC = () => {
             </div>
             <div className="relative group">
               <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors text-[20px]">lock</span>
-              <input 
-                className="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-12 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all" 
-                id="password" 
-                placeholder="••••••••••••" 
+              <input
+                className="w-full bg-surface-container-low border border-border-subtle rounded-lg py-3.5 pl-12 pr-12 text-on-surface placeholder:text-outline/50 input-focus-ring transition-all"
+                id="password"
+                placeholder="••••••••••••"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button 
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center" 
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center"
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 tabIndex={-1}
@@ -118,20 +118,20 @@ export const LoginPage: React.FC = () => {
               </button>
             </div>
           </div>
-          
+
           <div className="flex items-center">
-            <input 
-              className="w-4 h-4 rounded border-border-subtle bg-surface-container-low text-primary focus:ring-primary focus:ring-offset-background-deep" 
-              id="remember" 
+            <input
+              className="w-4 h-4 rounded border-border-subtle bg-surface-container-low text-primary focus:ring-primary focus:ring-offset-background-deep"
+              id="remember"
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
             <label className="ml-3 font-body-md text-on-surface-variant cursor-pointer select-none" htmlFor="remember">Remember this station</label>
           </div>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={isLoading}
             className="w-full bg-primary py-4 rounded-lg font-label-md text-label-md text-on-primary-container uppercase tracking-widest font-bold shadow-lg shadow-primary/20 hover:bg-primary-fixed-dim active:scale-[0.98] transition-all disabled:opacity-50"
           >
@@ -148,9 +148,9 @@ export const LoginPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <button 
-            type="button" 
+        <div className="grid grid-cols-1 gap-4">
+          <button
+            type="button"
             onClick={() => handleGoogleLogin()}
             disabled={isSsoLoading}
             className="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high border border-border-subtle rounded-lg hover:bg-surface-variant transition-colors group"
@@ -165,25 +165,16 @@ export const LoginPage: React.FC = () => {
               {isSsoLoading ? 'Connecting...' : 'Google'}
             </span>
           </button>
-          <button type="button" className="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-high border border-border-subtle rounded-lg hover:bg-surface-variant transition-colors group">
-            <svg className="w-5 h-5" viewBox="0 0 23 23">
-              <path d="M0 0h11v11H0z" fill="#f3f3f3"></path>
-              <path d="M12 0h11v11H12z" fill="#f3f3f3"></path>
-              <path d="M0 12h11v11H0z" fill="#f3f3f3"></path>
-              <path d="M12 12h11v11H12z" fill="#f3f3f3"></path>
-            </svg>
-            <span className="text-on-surface-variant font-label-md group-hover:text-on-surface">Azure AD</span>
-          </button>
         </div>
       </div>
-      
+
       <footer className="mt-8 flex justify-between px-2">
         <div className="flex gap-6">
           <a className="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
           <a className="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
         </div>
         <div className="font-label-md text-label-md text-outline/40">
-            v2.4.0-Stable
+          v2.4.0-Stable
         </div>
       </footer>
     </main>
