@@ -8,6 +8,7 @@ import { shipmentsApi } from '../features/shipments/api/shipmentsApi';
 import { inventoryApi } from '../features/inventory/api/inventoryApi';
 import { workflowsApi } from '../features/workflows/api/workflowsApi';
 import { reportsApi } from '../features/reports/api/reportsApi';
+import { aiApi } from '../features/ai/api/aiApi';
 import authReducer from '../features/auth/slices/authSlice';
 
 export const store = configureStore({
@@ -22,6 +23,7 @@ export const store = configureStore({
     [inventoryApi.reducerPath]: inventoryApi.reducer,
     [workflowsApi.reducerPath]: workflowsApi.reducer,
     [reportsApi.reducerPath]: reportsApi.reducer,
+    [aiApi.reducerPath]: aiApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -33,7 +35,8 @@ export const store = configureStore({
       shipmentsApi.middleware,
       inventoryApi.middleware,
       workflowsApi.middleware,
-      reportsApi.middleware
+      reportsApi.middleware,
+      aiApi.middleware
     ),
 });
 

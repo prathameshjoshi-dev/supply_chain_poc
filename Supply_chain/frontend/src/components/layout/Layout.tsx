@@ -40,13 +40,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
             <span className={`material-symbols-outlined ${location.pathname.includes('users') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>group</span>
             <span className="font-label-md text-label-md">Users</span>
           </button>
-          <Link
-            to="/reports"
-            className={`flex items-center gap-3 px-4 py-3 transition-all ${
-              location.pathname.startsWith('/reports')
-                ? 'text-primary bg-primary/10 border-l-4 border-primary active-glow rounded-r-lg'
-                : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'
-            }`}
+          <Link 
+            to="/reports" 
+            className={`flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.startsWith('/reports') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}
           >
             <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/reports') ? { fontVariationSettings: "'FILL' 1" } : {}}>analytics</span>
             <span className="font-label-md text-label-md">Reporting</span>
@@ -68,6 +64,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
           >
             <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/workflows') ? { fontVariationSettings: "'FILL' 1" } : {}}>account_tree</span>
             <span className="font-label-md text-label-md">Workflows</span>
+          </a>
+          <a 
+            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/ai-assistant') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
+            href="/ai-assistant"
+          >
+            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/ai-assistant') ? { fontVariationSettings: "'FILL' 1" } : {}}>smart_toy</span>
+            <span className="font-label-md text-label-md">AI Assistant</span>
           </a>
         </nav>
         <div className="p-4 border-t border-border-subtle space-y-1">

@@ -9,6 +9,7 @@ import { CreateShipmentPage } from './features/shipments/pages/CreateShipmentPag
 import { InventoryPage } from './features/inventory/pages/InventoryPage';
 import { WorkflowsPage } from './features/workflows/pages/WorkflowsPage';
 import { ReportsPage } from './features/reports/pages/ReportsPage';
+import { AiAssistantPage } from './features/ai/pages/AiAssistantPage';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
@@ -62,6 +63,7 @@ function App() {
           <Route path="/inventory" element={<PrivateRoute><InventoryPage /></PrivateRoute>} />
           <Route path="/workflows" element={<PrivateRoute><WorkflowsPage /></PrivateRoute>} />
           <Route path="/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
+          <Route path="/ai-assistant" element={<PrivateRoute><AiAssistantPage /></PrivateRoute>} />
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/shipments" element={<ShipmentsPage />} />
           <Route path="/shipments/new" element={<CreateShipmentPage />} />
