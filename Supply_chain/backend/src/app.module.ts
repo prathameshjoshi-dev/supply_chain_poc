@@ -11,6 +11,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 import { ShipmentsModule } from './modules/shipments/shipments.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
 import { WorkflowsModule } from './modules/workflows/workflows.module';
+import { ReportsModule } from './modules/reports/reports.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { WorkflowsModule } from './modules/workflows/workflows.module';
     ShipmentsModule,
     InventoryModule,
     WorkflowsModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

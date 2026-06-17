@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../store';
 import { logout } from '../../features/auth/slices/authSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -38,6 +38,17 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
             <span className={`material-symbols-outlined ${location.pathname.includes('users') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>group</span>
             <span className="font-label-md text-label-md">Users</span>
           </button>
+          <Link
+            to="/reports"
+            className={`flex items-center gap-3 px-4 py-3 transition-all ${
+              location.pathname.startsWith('/reports')
+                ? 'text-primary bg-primary/10 border-l-4 border-primary active-glow rounded-r-lg'
+                : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'
+            }`}
+          >
+            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/reports') ? { fontVariationSettings: "'FILL' 1" } : {}}>analytics</span>
+            <span className="font-label-md text-label-md">Reporting</span>
+          </Link>
           <a 
             className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/inventory') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
             href="/inventory"
