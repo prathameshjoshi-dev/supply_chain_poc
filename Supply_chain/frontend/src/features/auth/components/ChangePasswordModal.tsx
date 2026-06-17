@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useChangePasswordMutation } from '../api/authApi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../../../store';
+import { logout } from '../slices/authSlice';
 
 interface ChangePasswordModalProps {
   isOpen: boolean;
@@ -19,6 +21,8 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
 
   const [changePassword, { isLoading }] = useChangePasswordMutation();
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -51,12 +55,14 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
         newPassword
       }).unwrap();
       
-      setSuccessMsg('Password updated successfully');
+      setSuccessMsg('Password updated successfully. Logging out...');
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
       setTimeout(() => {
         onClose();
+        dispatch(logout());
+        navigate('/login');
         setSuccessMsg('');
       }, 1500);
     } catch (err: any) {
