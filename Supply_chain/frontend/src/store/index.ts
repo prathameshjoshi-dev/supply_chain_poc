@@ -4,6 +4,7 @@ import { usersApi } from '../features/users/api/usersApi';
 import { rolesApi } from '../features/users/api/rolesApi';
 import { auditLogsApi } from '../features/users/api/auditLogsApi';
 import { notificationsApi } from '../features/notifications/api/notificationsApi';
+import { shipmentsApi } from '../features/shipments/api/shipmentsApi';
 import authReducer from '../features/auth/slices/authSlice';
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     [rolesApi.reducerPath]: rolesApi.reducer,
     [auditLogsApi.reducerPath]: auditLogsApi.reducer,
     [notificationsApi.reducerPath]: notificationsApi.reducer,
+  [shipmentsApi.reducerPath]: shipmentsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -21,7 +23,8 @@ export const store = configureStore({
       usersApi.middleware, 
       rolesApi.middleware,
       auditLogsApi.middleware,
-      notificationsApi.middleware
+      notificationsApi.middleware,
+      shipmentsApi.middleware
     ),
 });
 

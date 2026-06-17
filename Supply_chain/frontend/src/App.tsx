@@ -4,6 +4,8 @@ import { store } from './store';
 import { LoginPage } from './features/auth/pages/LoginPage';
 import { UsersPage } from './features/users/pages/UsersPage';
 import { NotificationsPage } from './features/notifications/pages/NotificationsPage';
+import { ShipmentsPage } from './features/shipments/pages/ShipmentsPage';
+import { CreateShipmentPage } from './features/shipments/pages/CreateShipmentPage';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
@@ -56,6 +58,8 @@ function App() {
           <Route path="/login" element={<AuthBackground><LoginPage /></AuthBackground>} />
           <Route path="/workflows" element={<div className="p-8 text-on-surface">Workflows coming soon</div>} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/shipments" element={<ShipmentsPage />} />
+          <Route path="/shipments/new" element={<CreateShipmentPage />} />
           <Route path="/reporting" element={<div className="p-8 text-on-surface">Reporting coming soon</div>} />
           <Route path="/users" element={
             <PrivateRoute>

@@ -42,8 +42,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
             <span className="material-symbols-outlined text-primary/70 group-hover:text-primary">inventory_2</span>
             <span className="font-label-md text-label-md">Inventory</span>
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg group">
-            <span className="material-symbols-outlined text-primary/70 group-hover:text-primary">local_shipping</span>
+          <button onClick={() => navigate('/shipments')} className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.includes('shipments') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}>
+            <span className={`material-symbols-outlined ${location.pathname.includes('shipments') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>local_shipping</span>
             <span className="font-label-md text-label-md">Shipments</span>
           </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg group">

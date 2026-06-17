@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Shipment | Nexus Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "status-warning": "#F59E0B",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-high": "#252b2b",
+                    "inverse-surface": "#dee4e4",
+                    "surface-container": "#1b2121",
+                    "on-error-container": "#ffdad6",
+                    "background-deep": "#0F172A",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-container-lowest": "#090f10",
+                    "tertiary-container": "#e4884d",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-tertiary": "#522300",
+                    "primary-container": "#1cb0b8",
+                    "outline-variant": "#3d494a",
+                    "on-background": "#dee4e4",
+                    "surface": "#0f1415",
+                    "surface-bright": "#343a3b",
+                    "inverse-primary": "#00696e",
+                    "on-primary-fixed-variant": "#004f53",
+                    "secondary": "#bec6e0",
+                    "status-critical": "#EF4444",
+                    "on-tertiary-container": "#5b2700",
+                    "background": "#0f1415",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary-container": "#003d40",
+                    "on-error": "#690005",
+                    "outline": "#869394",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "on-tertiary-fixed": "#321200",
+                    "surface-container-highest": "#303636",
+                    "tertiary": "#ffb68b",
+                    "surface-dim": "#0f1415",
+                    "primary-fixed": "#79f5fd",
+                    "error-container": "#93000a",
+                    "tertiary-fixed": "#ffdbc9",
+                    "secondary-container": "#3f465c",
+                    "on-secondary-container": "#adb4ce",
+                    "primary-fixed-dim": "#59d8e0",
+                    "status-success": "#10B981",
+                    "on-secondary": "#283044",
+                    "border-subtle": "rgba(255, 255, 255, 0.1)",
+                    "surface-variant": "#303636",
+                    "primary": "#59d8e0",
+                    "on-primary": "#00373a",
+                    "on-surface": "#dee4e4",
+                    "surface-tint": "#59d8e0",
+                    "tertiary-fixed-dim": "#ffb68b",
+                    "on-primary-fixed": "#002022",
+                    "inverse-on-surface": "#2c3132",
+                    "surface-container-low": "#171d1d",
+                    "on-surface-variant": "#bcc9ca",
+                    "surface-glass": "rgba(30, 41, 59, 0.7)"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "gutter": "24px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Outfit"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "headline-sm": ["Outfit"],
+                    "mono-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #dee4e4;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.75);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 20, 21, 0.5);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d494a;
+            border-radius: 10px;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1cb0b8 !important;
+            box-shadow: 0 0 0 4px rgba(28, 176, 184, 0.2);
+        }
+        .step-active { color: #59d8e0; border-color: #59d8e0; }
+        .step-inactive { color: #869394; border-color: #3d494a; }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-glass backdrop-blur-md border-r border-outline-variant shadow-lg flex flex-col py-base z-50">
+<div class="px-6 py-4 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Nexus</h1>
+<p class="text-xs text-on-surface-variant tracking-widest uppercase">Global Command</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<!-- Inventory -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md text-body-md">Inventory</span>
+</a>
+<!-- Shipments (ACTIVE) -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary border-l-4 border-primary bg-primary-container/10 transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body-md text-body-md font-semibold">Shipments</span>
+</a>
+<!-- Workflows -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-body-md text-body-md">Workflows</span>
+</a>
+<!-- Notifications -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md text-body-md">Notifications</span>
+</a>
+<!-- Reporting -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-body-md text-body-md">Reporting</span>
+</a>
+<!-- AI Assistant -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-body-md text-body-md">AI Assistant</span>
+</a>
+</nav>
+<div class="px-6 py-4 mt-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmmyNgIfY0ldrMafqDfVeDZz0ME9EemWIK_-_jKZ_-99S06c6aEqJzQiMBN9C4Gxl1S7Gd6JOdy0x49r_GRoIP61arfnYJt79L2snQXge42rfaCJ-wrFvFyBPIFKC0-EuWwiQdQAXDJ4XbjYdSG9nLfYoIs97MglQe6NsmXfcwMzlJSmuWNJROwMdJLtNeURTELvE6EYCQkvZGkCkDv8z-416NEbLYPEZ3Rx1_n8isMvFkNrzC9CfENfG5PAdFZvV7aR2Vmt3I5CE"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Alex Rivera</p>
+<p class="text-xs text-on-surface-variant">Global Ops Chief</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-glass backdrop-blur-md border-b border-outline-variant shadow-sm flex justify-between items-center px-margin-desktop z-40">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary/20 rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/50 transition-all" placeholder="Track shipment, cargo, or vessel..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Nexus Logistics</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar bg-background p-margin-desktop">
+<!-- Header Section -->
+<div class="max-w-5xl mx-auto mb-10">
+<nav class="flex items-center gap-2 text-sm text-on-surface-variant mb-4">
+<span>Shipments</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">New Shipment</span>
+</nav>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Create New Shipment</h2>
+<p class="text-on-surface-variant max-w-xl">Configure origin, destination, and cargo specifications for global dispatch. Data validation is performed in real-time.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 rounded-lg border border-outline-variant text-on-surface font-medium hover:bg-surface-container-highest transition-all active:scale-95">Cancel</button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-bold hover:brightness-110 shadow-lg shadow-primary-container/20 transition-all active:scale-95">Create Shipment</button>
+</div>
+</div>
+</div>
+<div class="max-w-5xl mx-auto grid grid-cols-12 gap-gutter">
+<!-- Left Column: The Wizard/Form -->
+<div class="col-span-12 lg:col-span-8 space-y-8 pb-12">
+<!-- Section 1: Shipment Details -->
+<section class="glass-card rounded-xl p-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">1. Shipment Details</h3>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="col-span-2 md:col-span-1">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Shipment ID</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 px-4 font-mono-md text-primary/70 cursor-not-allowed" readonly="" type="text" value="NEX-7729-QX-2024"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-sm text-on-surface-variant/50">lock</span>
+</div>
+</div>
+<div class="col-span-2 md:col-span-1">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Priority</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface appearance-none">
+<option>Low</option>
+<option selected="">Medium</option>
+<option>High</option>
+<option class="text-status-critical font-bold">Critical</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Shipment Type</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center gap-2 p-4 rounded-lg border-2 border-primary bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-primary">deployed_code</span>
+<span class="text-sm font-medium">Standard</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-lg border border-outline-variant hover:border-outline transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">bolt</span>
+<span class="text-sm font-medium">Express</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-lg border border-outline-variant hover:border-outline transition-all">
+<span class="material-symbols-outlined text-status-warning">warning</span>
+<span class="text-sm font-medium">Hazardous</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Origin & Destination -->
+<section class="glass-card rounded-xl p-8 relative overflow-hidden">
+<!-- Subtle background map glow -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/5 blur-3xl rounded-full"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">distance</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">2. Origin &amp; Destination</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative">
+<!-- Origin -->
+<div class="space-y-4">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Origin Port/City</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40" placeholder="Search Shanghai, Hamburg..." type="text"/>
+<!-- Suggested Dropdown (Mockup) -->
+<div class="hidden group-focus-within:block absolute top-full left-0 w-full mt-2 bg-surface-container-high border border-outline rounded-lg shadow-2xl z-10 overflow-hidden">
+<div class="px-4 py-2 hover:bg-surface-container-highest cursor-pointer flex items-center gap-3">
+<span class="material-symbols-outlined text-sm">anchor</span>
+<span class="text-sm">Shanghai Port (CNSHA)</span>
+</div>
+<div class="px-4 py-2 hover:bg-surface-container-highest cursor-pointer flex items-center gap-3">
+<span class="material-symbols-outlined text-sm">anchor</span>
+<span class="text-sm">Singapore Terminal (SGPAS)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Connector Line -->
+<div class="hidden md:flex absolute left-1/2 top-[58px] -translate-x-1/2 items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-background border border-outline-variant flex items-center justify-center text-primary-container z-10">
+<span class="material-symbols-outlined text-sm">east</span>
+</div>
+<div class="w-24 h-[1px] bg-dashed bg-[radial-gradient(circle_at_center,#3d494a_0.5px,transparent_1px)] bg-[length:6px_1px] absolute"></div>
+</div>
+<!-- Destination -->
+<div class="space-y-4">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Destination Port/City</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">flag</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40" placeholder="Search Los Angeles, Rotterdam..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Carrier & Service -->
+<section class="glass-card rounded-xl p-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">3. Logistics Provider</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Preferred Carrier</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface">
+<option>Apex Logistics</option>
+<option selected="">Global Freight Systems</option>
+<option>QuickShip Inc.</option>
+<option>Maersk Ocean</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Service Level</label>
+<div class="flex p-1 bg-surface-container-lowest rounded-xl border border-outline-variant">
+<button class="flex-1 py-2 text-xs font-bold uppercase tracking-wider text-on-primary-container bg-primary-container rounded-lg transition-all">Standard</button>
+<button class="flex-1 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">Next Day</button>
+<button class="flex-1 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-all">Economy</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Cargo Information -->
+<section class="glass-card rounded-xl p-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">4. Cargo Information</h3>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 md:col-span-4">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Total Weight (kg)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface" placeholder="0.00" type="number"/>
+</div>
+<div class="col-span-12 md:col-span-4">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Quantity (Items)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface" placeholder="1" type="number"/>
+</div>
+<div class="col-span-12 md:col-span-4">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Packaging Type</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface">
+<option>Palletized</option>
+<option>Container</option>
+<option>Loose Carton</option>
+</select>
+</div>
+<div class="col-span-12">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Dimensions (L x W x H cm)</label>
+<div class="flex gap-4">
+<input class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface" placeholder="Length" type="number"/>
+<div class="flex items-center text-outline-variant">×</div>
+<input class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface" placeholder="Width" type="number"/>
+<div class="flex items-center text-outline-variant">×</div>
+<input class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface" placeholder="Height" type="number"/>
+</div>
+</div>
+<div class="col-span-12">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Cargo Description</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface resize-none" placeholder="Specify contents, handling instructions, or special requirements..." rows="3"></textarea>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Summary & Insights -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Shipment Summary Card -->
+<div class="glass-card rounded-xl overflow-hidden sticky top-0">
+<div class="p-6 bg-primary/10 border-b border-primary/20">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-1">Configuration Summary</h4>
+<p class="text-xs text-on-surface-variant">Real-time quote estimation</p>
+</div>
+<div class="p-6 space-y-6">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Estimated Transit</span>
+<span class="font-semibold text-on-surface">14 - 18 Days</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Carrier Reliability</span>
+<div class="flex gap-1 text-status-success">
+<span class="material-symbols-outlined text-xs fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-xs">star</span>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<div>
+<div class="flex justify-between items-baseline mb-2">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Base Rate</span>
+<span class="font-mono-md text-on-surface">$1,240.00</span>
+</div>
+<div class="flex justify-between items-baseline mb-4">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-widest">Fuel Surcharge</span>
+<span class="font-mono-md text-on-surface">$85.50</span>
+</div>
+<div class="flex justify-between items-end pt-4 border-t border-outline-variant">
+<span class="font-bold text-on-surface">TOTAL EST.</span>
+<span class="text-headline-md font-headline-md text-primary">$1,325.50</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-status-warning">bolt</span>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+<strong class="text-on-surface">AI Optimizing:</strong> We've found a route via Long Beach that could save you <span class="text-status-success">$120</span> and 2 days. 
+                                    <a class="text-primary underline block mt-1" href="#">Review Suggestion</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Network Mini Map -->
+<div class="glass-card rounded-xl p-4 aspect-video relative overflow-hidden group">
+<img alt="Abstract global trade map" class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:scale-110 transition-transform duration-1000" data-alt="A futuristic digital data visualization map of the world showing trade routes as glowing teal lines on a deep navy blue background. The map is overlaid with geometric UI elements, floating data points, and a subtle glassmorphic blur effect. The lighting is low-key with high-tech accents in cyan and white, creating an authoritative and precise atmosphere for a logistics command center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH3vm0m9RnoNnSeofAV4gVVltM4AU_gEXLlNPHiJYerFS54vLLumTA9O1jgW0nZq1ioWtpOE0IHnaJmwtjonA_YfB_miS1QVjx2Nk2hNo_TIvL9yGtR85YCmpiI3ky_algGY4pPORkCDiLxPn5SY7nbZZkTlfJz6ezRoFF2CaivKX_sjrqMjG1fCaefPOTu7Z9D14J9n8ss-r_7JWq8jZtB0kQby3oXdSPmo6ZJwua5HXVQtUH0mOJrWQxF2oQ8tOeigHPbDFMqAg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-deep to-transparent"></div>
+<div class="relative z-10 h-full flex flex-col justify-end">
+<h5 class="text-xs font-bold uppercase tracking-tighter text-primary">Live Network Map</h5>
+<p class="text-[10px] text-on-surface-variant">Monitoring 4,200 active vessels</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Toast (Hidden by default) -->
+<div class="fixed bottom-10 right-10 translate-y-20 opacity-0 transition-all duration-500 z-[100]" id="successToast">
+<div class="bg-surface-container-high border border-status-success/30 rounded-xl p-4 flex items-center gap-4 shadow-2xl">
+<div class="w-10 h-10 rounded-full bg-status-success/10 flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Shipment Created</p>
+<p class="text-xs text-on-surface-variant">NEX-7729-QX-2024 has been queued for dispatch.</p>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interactions
+        const createBtn = document.querySelector('button.bg-primary-container');
+        const toast = document.getElementById('successToast');
+
+        createBtn.addEventListener('click', () => {
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 4000);
+        });
+
+        // Hover effect for Type Selection
+        const typeButtons = document.querySelectorAll('section:nth-of-type(1) .grid-cols-3 button');
+        typeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                typeButtons.forEach(b => {
+                    b.classList.remove('border-primary', 'bg-primary/5');
+                    b.classList.add('border-outline-variant');
+                    b.querySelector('span:first-child').classList.remove('text-primary');
+                    b.querySelector('span:first-child').classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('border-primary', 'bg-primary/5');
+                btn.classList.remove('border-outline-variant');
+                btn.querySelector('span:first-child').classList.add('text-primary');
+                btn.querySelector('span:first-child').classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>
