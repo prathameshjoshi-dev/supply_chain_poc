@@ -6,6 +6,7 @@ import { UserInsights } from '../components/UserInsights';
 import { InviteUserModal } from '../components/InviteUserModal';
 import { EditUserModal } from '../components/EditUserModal';
 import { PermissionsManager } from '../components/PermissionsManager';
+import { AuditLogsManager } from '../components/AuditLogsManager';
 import { Layout } from '../../../components/layout/Layout';
 import type { User } from '../api/usersApi';
 
@@ -18,10 +19,10 @@ export const UsersPage: React.FC = () => {
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
-  
+
   // Debounce search query to prevent excessive API calls
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchQuery);
@@ -97,14 +98,14 @@ export const UsersPage: React.FC = () => {
   const tabs = [
     { label: 'Operators', active: activeTab === 'Operators', onClick: () => setActiveTab('Operators') },
     { label: 'Permissions', active: activeTab === 'Permissions', onClick: () => setActiveTab('Permissions') },
-    { label: 'Activity Log', active: activeTab === 'Activity Log', onClick: () => alert('Activity Log tab') }
+    { label: 'Activity Log', active: activeTab === 'Activity Log', onClick: () => setActiveTab('Activity Log') }
   ];
 
   return (
-    <Layout tabs={tabs}>
+    <Layout tabs={tabs} pageTitle='User Managements'>
       {activeTab === 'Operators' ? (
         <>
-          <UserFilters 
+          <UserFilters
             roleFilter={roleFilter}
             setRoleFilter={setRoleFilter}
             scopeFilter={scopeFilter}
@@ -113,8 +114,8 @@ export const UsersPage: React.FC = () => {
             setSearchQuery={setSearchQuery}
             onInviteClick={() => setIsInviteModalOpen(true)}
           />
-          
-          <UserTable 
+
+          <UserTable
             users={usersData?.data || []}
             total={usersData?.total || 0}
             page={usersData?.page || 1}
@@ -126,28 +127,30 @@ export const UsersPage: React.FC = () => {
             isLoading={isLoading}
           />
 
-          <UserInsights 
+          <UserInsights
             insights={insightsData}
             isLoading={isInsightsLoading}
           />
         </>
       ) : activeTab === 'Permissions' ? (
         <PermissionsManager />
+      ) : activeTab === 'Activity Log' ? (
+        <AuditLogsManager />
       ) : null}
 
-      <InviteUserModal 
-        isOpen={isInviteModalOpen} 
-        onClose={() => setIsInviteModalOpen(false)} 
+      <InviteUserModal
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
         onSubmit={handleInviteSubmit}
         isLoading={isCreating}
       />
 
-      <EditUserModal 
-        isOpen={isEditModalOpen} 
+      <EditUserModal
+        isOpen={isEditModalOpen}
         onClose={() => {
           setIsEditModalOpen(false);
           setUserToEdit(null);
-        }} 
+        }}
         onSubmit={handleEditSubmit}
         isLoading={isUpdating}
         user={userToEdit}

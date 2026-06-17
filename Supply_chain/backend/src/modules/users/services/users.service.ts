@@ -5,11 +5,13 @@ import * as bcrypt from 'bcrypt';
 import { User, UserDocument } from '../../../database/schemas/user.schema';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { AuditLogsService } from '../../audit-logs/services/audit-logs.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private auditLogsService: AuditLogsService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -26,6 +28,15 @@ export class UsersService {
     });
     
     const saved = await createdUser.save();
+    
+    // Log the event
+    await this.auditLogsService.logEvent({
+      action: 'CREATE',
+      entity: 'User',
+      entityId: saved.name,
+      severity: 'success'
+    });
+
     const result: any = saved.toObject();
     delete result.passwordHash;
     return result;
@@ -83,6 +94,15 @@ export class UsersService {
     if (!updatedUser) {
       throw new NotFoundException(`User #${id} not found`);
     }
+
+    // Log the event
+    await this.auditLogsService.logEvent({
+      action: 'UPDATE',
+      entity: 'User',
+      entityId: updatedUser.name,
+      severity: 'info'
+    });
+
     return updatedUser;
   }
 
@@ -96,6 +116,15 @@ export class UsersService {
     if (!deletedUser) {
       throw new NotFoundException(`User #${id} not found`);
     }
+
+    // Log the event
+    await this.auditLogsService.logEvent({
+      action: 'DELETE',
+      entity: 'User',
+      entityId: deletedUser.name,
+      severity: 'critical'
+    });
+
     return deletedUser;
   }
 
@@ -105,6 +134,15 @@ export class UsersService {
         { _id: { $in: userIds } },
         { $set: { status: 'inactive' } }
       ).exec();
+
+      // Log the bulk event
+      await this.auditLogsService.logEvent({
+        action: 'UPDATE',
+        entity: 'Users Bulk Action',
+        entityId: `${userIds.length} users ${action}d`,
+        severity: 'warning'
+      });
+
       return { modifiedCount: result.modifiedCount };
     }
     return { modifiedCount: 0 };
