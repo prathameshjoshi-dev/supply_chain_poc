@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Logistics | Create New Task</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#bcc9ca",
+                    "secondary-container": "#3f465c",
+                    "on-primary-fixed-variant": "#004f53",
+                    "tertiary-fixed-dim": "#ffb68b",
+                    "outline": "#869394",
+                    "on-secondary-container": "#adb4ce",
+                    "status-success": "#10B981",
+                    "surface-container": "#1b2121",
+                    "on-tertiary-fixed": "#321200",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-tertiary-container": "#5b2700",
+                    "border-subtle": "rgba(255, 255, 255, 0.1)",
+                    "primary": "#59d8e0",
+                    "surface-tint": "#59d8e0",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#003d40",
+                    "inverse-surface": "#dee4e4",
+                    "surface-container-low": "#171d1d",
+                    "on-secondary": "#283044",
+                    "on-tertiary": "#522300",
+                    "primary-container": "#1cb0b8",
+                    "secondary": "#bec6e0",
+                    "on-primary-fixed": "#002022",
+                    "inverse-primary": "#00696e",
+                    "surface-dim": "#0f1415",
+                    "surface-container-highest": "#303636",
+                    "background-deep": "#0F172A",
+                    "status-warning": "#F59E0B",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#2c3132",
+                    "background": "#0f1415",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#252b2b",
+                    "status-critical": "#EF4444",
+                    "on-surface": "#dee4e4",
+                    "surface": "#0f1415",
+                    "surface-variant": "#303636",
+                    "surface-bright": "#343a3b",
+                    "primary-fixed-dim": "#59d8e0",
+                    "outline-variant": "#3d494a",
+                    "surface-glass": "rgba(30, 41, 59, 0.7)",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "tertiary-container": "#e4884d",
+                    "surface-container-lowest": "#090f10",
+                    "secondary-fixed": "#dae2fd",
+                    "on-primary": "#00373a",
+                    "primary-fixed": "#79f5fd",
+                    "tertiary": "#ffb68b",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "tertiary-fixed": "#ffdbc9",
+                    "on-background": "#dee4e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "mono-md": ["JetBrains Mono"],
+                    "headline-sm": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #dee4e4;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.8);
+        }
+        .priority-btn.active-critical { background: #93000a; border-color: #EF4444; }
+        .priority-btn.active-high { background: #753400; border-color: #F59E0B; }
+        .priority-btn.active-medium { background: #3f465c; border-color: #bec6e0; }
+        .priority-btn.active-low { background: #004f53; border-color: #59d8e0; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3d494a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #59d8e0; }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- Background Shader -->
+
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface-glass backdrop-blur-md shadow-lg flex flex-col py-base z-40">
+<div class="px-6 py-4 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Nexus</h1>
+<p class="text-xs text-on-surface-variant tracking-widest uppercase">Global Command</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span>Shipments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary border-l-4 border-primary bg-primary-container/10 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-bold">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span>Reporting</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-6 border-t border-outline-variant/30">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full border border-primary/30" data-alt="A professional headshot of a logistics operations director in a high-tech control room environment. The individual is male, wearing a sleek, dark business-casual shirt. The background features soft, out-of-focus screens displaying teal and blue data visualizations, matching the cool, tech-forward color palette of the Nexus platform. Lighting is cinematic and focused, suggesting a person of authority and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyV69rWbCCG_hWxtd1IJRabCI2UiZ32F9VzKN7oGcnXOSni4iUZsYPfabCm2e1AI439vB9byOlzLaVLDEeraO4orJ-RzprHLsvSBA6j0HEb5uazKy_-U5Kn9ezBR4ukadJh4uqBYDk_TtqObyAbjpa-KxHLF-zQ5KUqImEka1q5e7owxMBmSY0n0oYuDKfoz20P5t8emwsb3ukQA8VQOaaLY2YYZfVne_XsuVwCGIbDwtsFYw0Bqz7piS4vfFNF3AN8C_tyKuVhaY"/>
+<div>
+<p class="font-bold text-on-surface">Alex Chen</p>
+<p class="text-xs text-on-surface-variant">Chief Controller</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant bg-surface-glass backdrop-blur-md shadow-sm flex justify-between items-center px-margin-desktop z-30">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" placeholder="Search shipments, tasks, or SKUs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-mono-md text-primary">NODE: HQ-CENTRAL</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Background View) -->
+<main class="ml-64 pt-24 px-margin-desktop min-h-screen">
+<header class="mb-gutter flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Workflow Engine</h2>
+<p class="text-on-surface-variant mt-1">Orchestrating 1,248 active logistics protocols</p>
+</div>
+<button class="px-6 py-2.5 bg-primary-container text-on-primary-container font-bold rounded-lg flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-lg">
+<span class="material-symbols-outlined">add</span>
+                Create New Task
+            </button>
+</header>
+<!-- Mock Workflow Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Active Workflows Card -->
+<div class="col-span-8 glass-card rounded-xl p-6 h-[500px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">dynamic_feed</span>
+                        Live Workflow Execution
+                    </h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-xs font-bold text-on-surface-variant">ALL NODES</span>
+</div>
+</div>
+<div class="space-y-4 overflow-y-auto pr-2">
+<!-- Row 1 -->
+<div class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Replenishment-Alpha-7</p>
+<p class="text-xs text-on-surface-variant">Zone 4B • SKU: 88291-LX</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="w-32 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-primary shadow-[0_0_8px_#59d8e0]"></div>
+</div>
+<span class="text-xs font-mono-md text-primary">75%</span>
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-status-warning/10 flex items-center justify-center text-status-warning">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Shipment Delay Resolution</p>
+<p class="text-xs text-on-surface-variant">Carrier: GlobalFlex • ID: #SHP-992</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="w-32 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="w-1/3 h-full bg-status-warning shadow-[0_0_8px_#F59E0B]"></div>
+</div>
+<span class="text-xs font-mono-md text-status-warning">32%</span>
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Analytics Sidebar -->
+<div class="col-span-4 space-y-gutter">
+<div class="glass-card rounded-xl p-6">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Efficiency Rating</p>
+<p class="font-display-lg text-display-lg text-primary">94.2%</p>
+<div class="mt-4 h-16 w-full opacity-50 overflow-hidden">
+<!-- Mock sparkline pattern -->
+<div class="flex items-end gap-1 h-full">
+<div class="w-full bg-primary/20 h-1/2"></div>
+<div class="w-full bg-primary/40 h-3/4"></div>
+<div class="w-full bg-primary/20 h-1/3"></div>
+<div class="w-full bg-primary/60 h-4/5"></div>
+<div class="w-full bg-primary/40 h-2/3"></div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6">
+<h4 class="font-bold text-on-surface mb-4">Pending Approvals</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">priority_high</span>
+</div>
+<p class="text-sm">Discrepancy in Batch #220</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal Overlay (Active State) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm" id="modal-overlay">
+<!-- Modal Container -->
+<div class="glass-card w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[921px]">
+<!-- Modal Header -->
+<header class="p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-glass">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">add_task</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Create New Task</h3>
+<p class="text-xs text-on-surface-variant">Logistics Intelligence System Protocol</p>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-highest flex items-center justify-center transition-colors" onclick="document.getElementById('modal-overlay').style.display='none'">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</header>
+<!-- Modal Content (Scrollable) -->
+<div class="p-8 overflow-y-auto space-y-8 bg-surface-container-low/30">
+<!-- Task Type & Priority Row -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Task Type</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest border border-outline-variant rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none appearance-none cursor-pointer">
+<option>Replenishment</option>
+<option>Shipment Approval</option>
+<option>Discrepancy Resolution</option>
+<option>Quality Audit</option>
+<option>Carrier Re-routing</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Priority Level</label>
+<div class="grid grid-cols-4 gap-2 h-12">
+<button class="priority-btn border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-all" title="Low">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+</button>
+<button class="priority-btn border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-all" title="Medium">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+</button>
+<button class="priority-btn border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-all border-status-warning bg-status-warning/10 active-high" title="High">
+<span class="w-2.5 h-2.5 rounded-full bg-status-warning"></span>
+</button>
+<button class="priority-btn border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container-highest transition-all" title="Critical">
+<span class="w-2.5 h-2.5 rounded-full bg-status-critical animate-pulse"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Assignee & Entity Row -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Assignee</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">person_search</span>
+<input class="w-full bg-surface-container-highest border border-outline-variant rounded-lg py-3 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Search operators..." type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Related Entity ID</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">database</span>
+<input class="w-full bg-surface-container-highest border border-outline-variant rounded-lg py-3 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono-md" placeholder="SHP-000-000 or SKU" type="text"/>
+</div>
+</div>
+</div>
+<!-- Date Picker -->
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Due Date</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">calendar_today</span>
+<input class="w-full bg-surface-container-highest border border-outline-variant rounded-lg py-3 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-on-surface" type="date"/>
+</div>
+</div>
+<!-- Description -->
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Notes &amp; Special Instructions</label>
+<textarea class="w-full bg-surface-container-highest border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" placeholder="Provide detailed workflow context for the operator..." rows="4"></textarea>
+<div class="flex justify-end">
+<span class="text-[10px] text-on-surface-variant/60 font-mono-md">ENCRYPTION: AES-256 ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<footer class="p-6 border-t border-outline-variant/30 flex justify-between items-center bg-surface-glass">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">info</span>
+                    This task will trigger an automated AI monitoring loop.
+                </div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 font-bold text-on-surface hover:bg-surface-container-highest rounded-lg transition-colors" onclick="document.getElementById('modal-overlay').style.display='none'">
+                        Cancel
+                    </button>
+<button class="px-8 py-2.5 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/10">
+                        Create Task
+                    </button>
+</div>
+</footer>
+</div>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Modal logic (basic toggle)
+        function toggleModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Priority selector animation/logic
+        const btns = document.querySelectorAll('.priority-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => {
+                    b.classList.remove('active-high', 'active-critical', 'active-medium', 'active-low', 'bg-status-warning/10', 'bg-status-critical/10', 'bg-secondary/10', 'bg-primary/10');
+                    b.classList.remove('border-status-warning', 'border-status-critical', 'border-secondary', 'border-primary');
+                });
+                
+                const type = btn.getAttribute('title');
+                if(type === 'High') {
+                    btn.classList.add('active-high', 'bg-status-warning/10', 'border-status-warning');
+                } else if(type === 'Critical') {
+                    btn.classList.add('active-critical', 'bg-status-critical/10', 'border-status-critical');
+                } else if(type === 'Medium') {
+                    btn.classList.add('active-medium', 'bg-secondary/10', 'border-secondary');
+                } else if(type === 'Low') {
+                    btn.classList.add('active-low', 'bg-primary/10', 'border-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -10,6 +10,7 @@ import { AuditLogsModule } from './modules/audit-logs/audit-logs.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { ShipmentsModule } from './modules/shipments/shipments.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
+import { WorkflowsModule } from './modules/workflows/workflows.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { InventoryModule } from './modules/inventory/inventory.module';
     NotificationsModule,
     ShipmentsModule,
     InventoryModule,
+    WorkflowsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

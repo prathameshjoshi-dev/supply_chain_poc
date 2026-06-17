@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Logistics - Operational Workflows</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.8);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(89, 216, 224, 0.3);
+            border-radius: 10px;
+        }
+        .kanban-column {
+            min-width: 320px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#59d8e0",
+                        "on-secondary-container": "#adb4ce",
+                        "secondary-container": "#3f465c",
+                        "surface": "#0f1415",
+                        "background": "#0f1415",
+                        "tertiary-fixed": "#ffdbc9",
+                        "on-error": "#690005",
+                        "on-secondary": "#283044",
+                        "tertiary": "#ffb68b",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#79f5fd",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "surface-container-low": "#171d1d",
+                        "surface-container-high": "#252b2b",
+                        "border-subtle": "rgba(255, 255, 255, 0.1)",
+                        "secondary": "#bec6e0",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-surface": "#dee4e4",
+                        "primary-container": "#1cb0b8",
+                        "on-tertiary": "#522300",
+                        "on-primary-fixed-variant": "#004f53",
+                        "surface-container": "#1b2121",
+                        "surface-variant": "#303636",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0f1415",
+                        "on-tertiary-container": "#5b2700",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#090f10",
+                        "surface-bright": "#343a3b",
+                        "tertiary-container": "#e4884d",
+                        "on-primary-container": "#003d40",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-background": "#dee4e4",
+                        "primary": "#59d8e0",
+                        "secondary-fixed": "#dae2fd",
+                        "background-deep": "#0F172A",
+                        "on-primary": "#00373a",
+                        "status-critical": "#EF4444",
+                        "inverse-primary": "#00696e",
+                        "primary-fixed-dim": "#59d8e0",
+                        "status-warning": "#F59E0B",
+                        "on-secondary-fixed": "#131b2e",
+                        "outline": "#869394",
+                        "on-primary-fixed": "#002022",
+                        "surface-container-highest": "#303636",
+                        "outline-variant": "#3d494a",
+                        "on-surface-variant": "#bcc9ca",
+                        "status-success": "#10B981",
+                        "surface-glass": "rgba(30, 41, 59, 0.7)",
+                        "inverse-surface": "#dee4e4",
+                        "tertiary-fixed-dim": "#ffb68b",
+                        "inverse-on-surface": "#2c3132"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "margin-desktop": "32px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Outfit"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Outfit"],
+                        "mono-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-deep text-on-surface font-body-md selection:bg-primary/30 min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-surface-container-low backdrop-blur-xl border-r border-border-subtle w-64">
+<div class="p-6">
+<h1 class="font-headline-sm text-headline-sm font-black text-primary">Nexus Control</h1>
+<p class="text-on-surface-variant font-label-md text-[10px] tracking-widest uppercase">Enterprise Logistics</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Shipments</span>
+</a>
+<!-- Active Tab: Workflows -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary/10 border-l-4 border-primary transition-all rounded-r-lg group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-md text-label-md">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI Assistant</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User operator profile" data-alt="Close-up portrait of a high-tech logistics operator wearing a subtle communication headset, bathed in the cool blue and teal ambient light of a command center, digital overlays reflected in their eyes, cinematic photorealism, professional corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP-oY5uKshNCRuzFwq0_0MhNRfhbAjNYDXZ4wd8le4c5BvTG6f38mdCY1EsMjzLrRF1v7ZnxuVwoa6XOFPq6NDldnNNGkMy0Pf5xQNTDUCSpJ-5W-nDVa8Dp13S4GakhhUVip3X714hR8360qPzRGwLXVqQ6VonRi8ERzA4ODeXydNBGE_TnJVfGA0D_3VAQjp5DQCg3k2nP2vQSBE9bjWKcOLvrgIUtMcyoGwlKsRtiEbMktNGO_wVh40geEb-A4wqYTSzy2HoZw"/>
+</div>
+<span class="font-label-md text-label-md">Op_Centauri_9</span>
+</div>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 left-64 h-16 z-30 bg-surface-glass backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-8 shadow-sm">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-full py-1.5 pl-10 pr-4 text-body-md w-64 focus:ring-2 focus:ring-primary focus:bg-surface-bright transition-all placeholder:text-on-surface-variant/50" placeholder="Search tasks, operators, IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<!-- Dashboard Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Operational Workflows</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Global supply chain task orchestration and real-time intervention.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-label-md flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-md">add</span>
+                Create Task
+            </button>
+</div>
+<!-- Status Filter Tabs -->
+<div class="flex items-center gap-2 mb-8 border-b border-border-subtle pb-px">
+<button class="px-6 py-3 border-b-2 border-primary text-primary font-bold transition-all flex items-center gap-2">
+                Open <span class="bg-primary/20 px-2 py-0.5 rounded text-[10px]">12</span>
+</button>
+<button class="px-6 py-3 text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2">
+                In-Progress <span class="bg-surface-variant px-2 py-0.5 rounded text-[10px]">8</span>
+</button>
+<button class="px-6 py-3 text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2">
+                Resolved <span class="bg-surface-variant px-2 py-0.5 rounded text-[10px]">25</span>
+</button>
+<button class="px-6 py-3 text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2">
+                Escalated <span class="text-status-critical bg-status-critical/10 px-2 py-0.5 rounded text-[10px]">5</span>
+</button>
+</div>
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Task List / Kanban Column -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-4">
+<!-- Task Card 1 (Critical) -->
+<div class="glass-card p-5 rounded-xl transition-all cursor-pointer border-l-4 border-status-critical flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-mono-md text-mono-md text-primary">#NX-9042</span>
+<span class="bg-status-critical/20 text-status-critical text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Critical Priority</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mt-1">Cross-Docking Replenishment Blocked</h3>
+</div>
+<div class="text-right">
+<span class="font-label-md text-on-surface-variant block">Due Today</span>
+<span class="text-status-critical font-bold text-label-md">14:00 GMT</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">category</span>
+<span class="text-body-md">Replenishment</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+<span class="text-body-md">S. Kowalski</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-background overflow-hidden">
+<img alt="Avatar" data-alt="Professional profile headshot of a logistics specialist, minimalist clean aesthetic, cool studio lighting with deep navy and teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9LuCnOQ6Urqph59qAjnYl-ubZUwT9rAXb6r7WsXvP99H913ct6MD56Biz3H2pBf10iGtWLV73SN417tpGu5WmmFR_N2OTjVkB4PfFgWX1ViYeYHC-PJtE9C5WHphOJIkrEgRVmBBP0fFoDwz89vyyU9LhlPOxsoJDiJkwbWDN7TpJb2ymVh1VLYzkfs0pmdhPRP2zTSrspC1Xkb0Vk2ufnf6iM_XoLlGRESiaB9r23Zbe4xabkvJO-KWWUp5gTecVIKwlYPEc1M8"/>
+</div>
+<div class="w-6 h-6 rounded-full border border-background overflow-hidden">
+<img alt="Avatar" data-alt="Professional profile headshot of a female supply chain manager, sleek modern look, soft cinematic lighting, deep shadows and glowing interface reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-2hwcs2QAi5uhqlH8ZE7tN8FK-W-dplZOs-EyHZU3N3nXC8tfK5HdCBal2W4Gui_Z05r2B7abv7Nwd2JHemNNqjW1piSedSbBx32L5b5_7rjy-C-akFD9NYV6PjJS_6u0VZy4aBbCj42L-gsuAECjJZvG6pycVAZFK3i_OdxteqarMKlajrlBIzl8ubTi2gLIR4YGfPhh_ZbOsvSiTbWWzCb2j7QnYxbe1PJLluYSl0o946dnHWqKQISIiAvzJkVcy_kCugfJTdE"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Card 2 (High) -->
+<div class="glass-card p-5 rounded-xl transition-all cursor-pointer border-l-4 border-status-warning flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-mono-md text-mono-md text-primary">#NX-8831</span>
+<span class="bg-status-warning/20 text-status-warning text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">High Priority</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mt-1">Customs Approval Pending (Rotterdam)</h3>
+</div>
+<div class="text-right">
+<span class="font-label-md text-on-surface-variant block">Due Tomorrow</span>
+<span class="text-on-surface-variant font-bold text-label-md">09:30 GMT</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">gavel</span>
+<span class="text-body-md">Approval</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+<span class="text-body-md">M. Chen</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Card 3 (Normal) -->
+<div class="glass-card p-5 rounded-xl transition-all cursor-pointer border-l-4 border-primary flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-mono-md text-mono-md text-primary">#NX-7215</span>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Standard</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mt-1">Route Optimization Audit</h3>
+</div>
+<div class="text-right">
+<span class="font-label-md text-on-surface-variant block">Oct 24</span>
+<span class="text-on-surface-variant font-bold text-label-md">17:00 GMT</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">route</span>
+<span class="text-body-md">Optimization</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+<span class="text-body-md">J. Smith</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Task View (Sidebar Style) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6 h-[calc(100vh-200px)] sticky top-24">
+<div class="glass-card p-6 rounded-xl flex flex-col h-full">
+<div class="flex justify-between items-start mb-6">
+<span class="font-mono-md text-mono-md text-primary">#NX-9042 Details</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-8">
+<!-- Summary -->
+<section>
+<h4 class="font-label-md text-on-surface-variant uppercase tracking-widest mb-3">Incident Summary</h4>
+<p class="text-body-md leading-relaxed">
+                                Bulk replenishment for Zone 4 (Pharma) is stalled due to a sensor failure on automated conveyor unit C-12. Priority items delayed: Insulin Batch 042-X.
+                            </p>
+</section>
+<!-- Progress Bar -->
+<div class="bg-surface-container-highest h-2 w-full rounded-full overflow-hidden">
+<div class="bg-status-critical h-full w-[15%]" style="box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);"></div>
+</div>
+<!-- Audit Trail -->
+<section>
+<h4 class="font-label-md text-on-surface-variant uppercase tracking-widest mb-4">Audit Trail</h4>
+<div class="space-y-4 border-l border-border-subtle ml-2 pl-4">
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-status-critical"></div>
+<div class="text-[11px] text-on-surface-variant font-mono-md">10:45 AM - System</div>
+<p class="text-body-md">Critical alarm triggered. Workflow auto-generated.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="text-[11px] text-on-surface-variant font-mono-md">11:02 AM - S. Kowalski</div>
+<p class="text-body-md">Assigned task. Initiating remote sensor diagnostic.</p>
+</div>
+<div class="relative opacity-50">
+<div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-surface-variant"></div>
+<div class="text-[11px] text-on-surface-variant font-mono-md">Pending...</div>
+<p class="text-body-md">Physical intervention required if diagnostic fails.</p>
+</div>
+</div>
+</section>
+<!-- Notes Area -->
+<section>
+<h4 class="font-label-md text-on-surface-variant uppercase tracking-widest mb-3">Operator Notes</h4>
+<textarea class="w-full bg-surface-container-highest border-border-subtle rounded-lg p-3 text-body-md focus:ring-1 focus:ring-primary h-24 placeholder:text-on-surface-variant/30" placeholder="Add observation..."></textarea>
+</section>
+</div>
+<!-- Action Buttons -->
+<div class="mt-6 pt-6 border-t border-border-subtle flex flex-col gap-3">
+<button class="w-full bg-status-critical/10 text-status-critical border border-status-critical/20 py-3 rounded-lg font-bold hover:bg-status-critical hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">priority_high</span>
+                            Escalate to Supervisor
+                        </button>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-variant text-on-surface py-3 rounded-lg font-bold hover:bg-surface-bright transition-all">Pause</button>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:brightness-110 transition-all">Complete</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for tab switching
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Haptic-style feedback logic could go here
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

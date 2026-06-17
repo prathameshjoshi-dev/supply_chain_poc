@@ -6,6 +6,7 @@ import { auditLogsApi } from '../features/users/api/auditLogsApi';
 import { notificationsApi } from '../features/notifications/api/notificationsApi';
 import { shipmentsApi } from '../features/shipments/api/shipmentsApi';
 import { inventoryApi } from '../features/inventory/api/inventoryApi';
+import { workflowsApi } from '../features/workflows/api/workflowsApi';
 import authReducer from '../features/auth/slices/authSlice';
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     [notificationsApi.reducerPath]: notificationsApi.reducer,
     [shipmentsApi.reducerPath]: shipmentsApi.reducer,
     [inventoryApi.reducerPath]: inventoryApi.reducer,
+    [workflowsApi.reducerPath]: workflowsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -27,7 +29,8 @@ export const store = configureStore({
       auditLogsApi.middleware,
       notificationsApi.middleware,
       shipmentsApi.middleware,
-      inventoryApi.middleware
+      inventoryApi.middleware,
+      workflowsApi.middleware
     ),
 });
 

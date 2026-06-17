@@ -49,10 +49,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
             <span className={`material-symbols-outlined ${location.pathname.includes('shipments') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>local_shipping</span>
             <span className="font-label-md text-label-md">Shipments</span>
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg group">
-            <span className="material-symbols-outlined text-primary/70 group-hover:text-primary">account_tree</span>
+          <a 
+            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/workflows') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
+            href="/workflows"
+          >
+            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/workflows') ? { fontVariationSettings: "'FILL' 1" } : {}}>account_tree</span>
             <span className="font-label-md text-label-md">Workflows</span>
-          </button>
+          </a>
         </nav>
         <div className="p-4 border-t border-border-subtle space-y-1">
           <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-all rounded-lg group">
