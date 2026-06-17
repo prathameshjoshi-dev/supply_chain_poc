@@ -5,6 +5,7 @@ import { UserTable } from '../components/UserTable';
 import { UserInsights } from '../components/UserInsights';
 import { InviteUserModal } from '../components/InviteUserModal';
 import { EditUserModal } from '../components/EditUserModal';
+import { PermissionsManager } from '../components/PermissionsManager';
 import { Layout } from '../../../components/layout/Layout';
 import type { User } from '../api/usersApi';
 
@@ -13,6 +14,7 @@ export const UsersPage: React.FC = () => {
   const [roleFilter, setRoleFilter] = useState('All Roles');
   const [scopeFilter, setScopeFilter] = useState('All Scopes');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('Operators');
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
@@ -93,39 +95,45 @@ export const UsersPage: React.FC = () => {
   };
 
   const tabs = [
-    { label: 'Operators', active: true },
-    { label: 'Permissions', onClick: () => alert('Permissions tab') },
-    { label: 'Audit Logs', onClick: () => alert('Audit Logs tab') },
+    { label: 'Operators', active: activeTab === 'Operators', onClick: () => setActiveTab('Operators') },
+    { label: 'Permissions', active: activeTab === 'Permissions', onClick: () => setActiveTab('Permissions') },
+    { label: 'Activity Log', active: activeTab === 'Activity Log', onClick: () => alert('Activity Log tab') }
   ];
 
   return (
-    <Layout pageTitle="User Management" tabs={tabs}>
-      <UserFilters 
-        roleFilter={roleFilter}
-        setRoleFilter={setRoleFilter}
-        scopeFilter={scopeFilter}
-        setScopeFilter={setScopeFilter}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        onInviteClick={() => setIsInviteModalOpen(true)}
-      />
-      
-      <UserTable 
-        users={usersData?.data || []}
-        total={usersData?.total || 0}
-        page={usersData?.page || 1}
-        limit={usersData?.limit || 5}
-        onPageChange={setPage}
-        onBulkAction={handleBulkAction}
-        onEdit={handleEditClick}
-        onToggleStatus={handleToggleStatus}
-        isLoading={isLoading}
-      />
+    <Layout tabs={tabs}>
+      {activeTab === 'Operators' ? (
+        <>
+          <UserFilters 
+            roleFilter={roleFilter}
+            setRoleFilter={setRoleFilter}
+            scopeFilter={scopeFilter}
+            setScopeFilter={setScopeFilter}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            onInviteClick={() => setIsInviteModalOpen(true)}
+          />
+          
+          <UserTable 
+            users={usersData?.data || []}
+            total={usersData?.total || 0}
+            page={usersData?.page || 1}
+            limit={usersData?.limit || 5}
+            onPageChange={setPage}
+            onBulkAction={handleBulkAction}
+            onEdit={handleEditClick}
+            onToggleStatus={handleToggleStatus}
+            isLoading={isLoading}
+          />
 
-      <UserInsights 
-        insights={insightsData}
-        isLoading={isInsightsLoading}
-      />
+          <UserInsights 
+            insights={insightsData}
+            isLoading={isInsightsLoading}
+          />
+        </>
+      ) : activeTab === 'Permissions' ? (
+        <PermissionsManager />
+      ) : null}
 
       <InviteUserModal 
         isOpen={isInviteModalOpen} 

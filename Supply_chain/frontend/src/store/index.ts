@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authApi } from '../features/auth/api/authApi';
 import { usersApi } from '../features/users/api/usersApi';
+import { rolesApi } from '../features/users/api/rolesApi';
 import authReducer from '../features/auth/slices/authSlice';
 
 export const store = configureStore({
@@ -8,9 +9,10 @@ export const store = configureStore({
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    [rolesApi.reducerPath]: rolesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, usersApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, usersApi.middleware, rolesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
