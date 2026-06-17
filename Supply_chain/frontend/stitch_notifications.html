@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification Center | Nexus Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(30, 41, 59, 0.75);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#79f5fd",
+                      "outline-variant": "#3d494a",
+                      "surface-glass": "rgba(30, 41, 59, 0.7)",
+                      "error": "#ffb4ab",
+                      "on-primary-container": "#003d40",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#ffb68b",
+                      "surface": "#0f1415",
+                      "primary-fixed-dim": "#59d8e0",
+                      "on-primary-fixed-variant": "#004f53",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "tertiary-container": "#e4884d",
+                      "on-surface-variant": "#bcc9ca",
+                      "secondary-fixed": "#dae2fd",
+                      "surface-container-low": "#171d1d",
+                      "on-secondary": "#283044",
+                      "surface-container": "#1b2121",
+                      "secondary-container": "#3f465c",
+                      "status-warning": "#F59E0B",
+                      "on-tertiary-fixed-variant": "#753400",
+                      "inverse-primary": "#00696e",
+                      "outline": "#869394",
+                      "on-error": "#690005",
+                      "background-deep": "#0F172A",
+                      "primary": "#59d8e0",
+                      "secondary": "#bec6e0",
+                      "on-error-container": "#ffdad6",
+                      "inverse-on-surface": "#2c3132",
+                      "surface-container-high": "#252b2b",
+                      "background": "#0f1415",
+                      "tertiary": "#ffb68b",
+                      "surface-dim": "#0f1415",
+                      "border-subtle": "rgba(255, 255, 255, 0.1)",
+                      "surface-tint": "#59d8e0",
+                      "status-critical": "#EF4444",
+                      "on-tertiary-container": "#5b2700",
+                      "surface-container-highest": "#303636",
+                      "primary-container": "#1cb0b8",
+                      "on-secondary-fixed": "#131b2e",
+                      "surface-container-lowest": "#090f10",
+                      "inverse-surface": "#dee4e4",
+                      "on-primary": "#00373a",
+                      "on-primary-fixed": "#002022",
+                      "on-background": "#dee4e4",
+                      "surface-bright": "#343a3b",
+                      "on-tertiary-fixed": "#321200",
+                      "on-tertiary": "#522300",
+                      "on-surface": "#dee4e4",
+                      "status-success": "#10B981",
+                      "surface-variant": "#303636",
+                      "on-secondary-container": "#adb4ce",
+                      "tertiary-fixed": "#ffdbc9",
+                      "secondary-fixed-dim": "#bec6e0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "base": "8px",
+                      "margin-desktop": "32px",
+                      "gutter": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "mono-md": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "headline-lg": ["Outfit"],
+                      "display-lg": ["Outfit"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "mono-md": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background-deep text-on-surface font-body-md overflow-hidden selection:bg-primary/30">
+<nav class="fixed left-0 top-0 h-full flex flex-col z-40 bg-surface-container-low backdrop-blur-xl border-r border-border-subtle w-64">
+<div class="p-6 flex flex-col gap-1">
+<h1 class="font-headline-sm text-headline-sm font-black text-primary">Nexus Control</h1>
+<p class="font-label-md text-label-md text-on-surface-variant/70 tracking-widest uppercase">Enterprise Logistics</p>
+</div>
+<div class="flex-1 px-3 space-y-1 overflow-y-auto py-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">local_shipping</span>
+<span class="font-label-md text-label-md">Shipments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">account_tree</span>
+<span class="font-label-md text-label-md">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-md text-label-md font-bold">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">smart_toy</span>
+<span class="font-label-md text-label-md">AI Assistant</span>
+</a>
+</div>
+<div class="p-4 border-t border-border-subtle space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-3">
+<img alt="User operator profile" class="w-8 h-8 rounded-full border border-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYzJ6L6KgnL5_eVJI5RZLD-yMQR-J4996Oh4zpF2cUg3ixTzu3sygk_RN7RFZ-Y16PsBYahkaC0sALD_77H_BE6CcauEL5e7kW44PaehYAaBRgOGIrfQLHFJtZIKggKMtJoulDu4xPoXNcF0YOrRjkAN3lLHhY0bJ69COZqLj0x9dg-vmm-7-AyQ1SE8PO78tAX3KDk9PqZ2GZNcuwl2AWEfN2XWR6V6fSAtr5p8TmVBo7JKoWJiXeu-JbkksKz_assIn_38yY9Zs"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Operator 42</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Level 4 Access</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="ml-64 flex flex-col h-screen overflow-hidden">
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 z-50 bg-surface-glass backdrop-blur-md border-b border-border-subtle shadow-sm">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Notifications</h2>
+<span class="px-2 py-0.5 bg-primary/20 text-primary rounded-full text-[10px] font-bold uppercase tracking-wider">Center</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md group">
+<span class="material-symbols-outlined text-lg group-hover:rotate-12 transition-transform">done_all</span>
+                    Mark all as read
+                </button>
+<div class="h-6 w-[1px] bg-border-subtle"></div>
+<div class="flex gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant/50 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto px-margin-desktop py-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed opacity-95">
+<div class="max-w-6xl mx-auto grid grid-cols-12 gap-gutter">
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4">Categories</h3>
+<nav class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2 bg-primary/10 text-primary rounded-lg font-label-md">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">all_inbox</span> All Alerts
+                                </span>
+<span class="text-xs opacity-60">124</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-md transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg text-status-critical">report</span> Critical
+                                </span>
+<span class="text-xs opacity-60">12</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-md transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg text-status-warning">warning</span> Warning
+                                </span>
+<span class="text-xs opacity-60">28</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-variant/30 rounded-lg font-label-md transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg text-primary">info</span> Information
+                                </span>
+<span class="text-xs opacity-60">84</span>
+</button>
+</nav>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4">Preferences</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-md">In-app Push</span>
+<div class="w-10 h-5 bg-primary/40 rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-primary rounded-full shadow-lg"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-md">Email Digests</span>
+<div class="w-10 h-5 bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-on-surface-variant rounded-full shadow-lg"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-md">SMS Alerts</span>
+<div class="w-10 h-5 bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-on-surface-variant rounded-full shadow-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<section class="col-span-12 lg:col-span-9 space-y-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-sm">calendar_month</span>
+<select class="bg-surface-container-high border-border-subtle rounded-lg pl-9 pr-8 py-2 text-xs font-label-md text-on-surface focus:ring-primary focus:border-primary appearance-none">
+<option>Past 24 Hours</option>
+<option>Past 7 Days</option>
+<option>Custom Range</option>
+</select>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-sm">filter_alt</span>
+<select class="bg-surface-container-high border-border-subtle rounded-lg pl-9 pr-8 py-2 text-xs font-label-md text-on-surface focus:ring-primary focus:border-primary appearance-none">
+<option>All Shipment Types</option>
+<option>Ocean Freight</option>
+<option>Air Express</option>
+<option>Ground Logistics</option>
+</select>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant font-mono-md">SYNCING: LIVE DATAFEED [OK]</p>
+</div>
+<div class="space-y-3">
+<div class="glass-card p-4 rounded-xl flex gap-4 items-start border-l-4 border-l-status-critical group hover:translate-x-1 transition-transform cursor-pointer">
+<div class="p-2 bg-status-critical/10 rounded-lg text-status-critical">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-sm font-bold text-on-surface">Critical Shipment Delay: NEX-9022-TX</h4>
+<span class="text-[10px] font-mono-md text-on-surface-variant">2m ago</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Severe weather conditions in Port of Rotterdam have halted all outgoing vessels. Priority Level 1 cargo delayed by estimated 48 hours. Immediate rerouting required.</p>
+<div class="flex gap-3">
+<button class="text-xs font-label-md text-primary hover:underline">RE-ROUTE NOW</button>
+<button class="text-xs font-label-md text-on-surface-variant hover:text-on-surface">VIEW SHIPMENT</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-on-surface-variant hover:text-on-surface transition-opacity">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="glass-card p-4 rounded-xl flex gap-4 items-start border-l-4 border-l-status-warning group hover:translate-x-1 transition-transform cursor-pointer">
+<div class="p-2 bg-status-warning/10 rounded-lg text-status-warning">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">inventory</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-sm font-bold text-on-surface">Stockout Alert: SKU-441-B</h4>
+<span class="text-[10px] font-mono-md text-on-surface-variant">14m ago</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Inventory at Austin-04 Hub has reached threshold (5 units). Automated replenishment failed due to vendor holiday. Manual override suggested.</p>
+<div class="flex gap-3">
+<button class="text-xs font-label-md text-primary hover:underline">TRIGGER REPLENISHMENT</button>
+<button class="text-xs font-label-md text-on-surface-variant hover:text-on-surface">VENDOR DETAILS</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-on-surface-variant hover:text-on-surface transition-opacity">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="glass-card p-4 rounded-xl flex gap-4 items-start border-l-4 border-l-primary group hover:translate-x-1 transition-transform cursor-pointer">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-sm font-bold text-on-surface">Workflow Escalation: Approval Required</h4>
+<span class="text-[10px] font-mono-md text-on-surface-variant">45m ago</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Freight invoice #INV-8821 exceeds standard variance (12.4%). Senior Operations approval requested for cost center 1004-Global.</p>
+<div class="flex gap-3">
+<button class="text-xs font-label-md text-primary hover:underline">APPROVE</button>
+<button class="text-xs font-label-md text-status-critical hover:underline">REJECT</button>
+<button class="text-xs font-label-md text-on-surface-variant hover:text-on-surface">INVESTIGATE</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-on-surface-variant hover:text-on-surface transition-opacity">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="glass-card p-4 rounded-xl flex gap-4 items-start border-l-4 border-l-primary/30 group opacity-70 hover:opacity-100 hover:translate-x-1 transition-all cursor-pointer">
+<div class="p-2 bg-on-surface-variant/10 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-sm font-bold text-on-surface">Shipment Delivered: NEX-8812-CA</h4>
+<span class="text-[10px] font-mono-md text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Last-mile delivery completed for 4 containers at Toronto Logistics Center. Proof of delivery uploaded by Driver-92.</p>
+<div class="flex gap-3">
+<button class="text-xs font-label-md text-primary hover:underline">VIEW POD</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-on-surface-variant hover:text-on-surface transition-opacity">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="glass-card p-4 rounded-xl flex gap-4 items-start border-l-4 border-l-status-warning group hover:translate-x-1 transition-transform cursor-pointer">
+<div class="p-2 bg-status-warning/10 rounded-lg text-status-warning">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">sensor_occupied</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-sm text-sm font-bold text-on-surface">Unauthorized Access: Warehouse B</h4>
+<span class="text-[10px] font-mono-md text-on-surface-variant">3h ago</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Security sensor triggered at East Gate after hours. High-value cargo sector. AI CCTV monitoring activated.</p>
+<div class="flex gap-3">
+<button class="text-xs font-label-md text-primary hover:underline">VIEW LIVE FEED</button>
+<button class="text-xs font-label-md text-on-surface-variant hover:text-on-surface">DISMISS FALSE ALARM</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-on-surface-variant hover:text-on-surface transition-opacity">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="flex justify-center pt-8">
+<button class="px-6 py-2 glass-card rounded-full text-on-surface-variant hover:text-primary transition-colors font-label-md text-xs flex items-center gap-2">
+                            Load older notifications
+                            <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<div class="fixed bottom-6 right-6 z-50">
+<button class="w-14 h-14 bg-primary text-on-primary-container rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform group">
+<span class="material-symbols-outlined text-2xl font-bold group-hover:rotate-90 transition-transform">add</span>
+</button>
+</div>
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.4)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = 'none';
+            });
+        });
+
+        // Simulating count-up animation for notification badges
+        const counters = document.querySelectorAll('.text-xs.opacity-60');
+        counters.forEach(counter => {
+            const target = parseInt(counter.innerText);
+            let count = 0;
+            const updateCount = () => {
+                const increment = target / 20;
+                if(count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    </script>
+</body></html>

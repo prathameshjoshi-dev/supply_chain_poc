@@ -88,7 +88,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
               <input className="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64 transition-all text-on-surface placeholder-on-surface-variant" placeholder="Global search..." type="text"/>
             </div>
-            <button className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-variant hover:bg-surface-variant/80 transition-transform active:scale-90 relative text-on-surface">
+            <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-variant hover:bg-surface-variant/80 transition-transform active:scale-90 relative text-on-surface">
               <span className="material-symbols-outlined">notifications</span>
               <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface-variant"></span>
             </button>
