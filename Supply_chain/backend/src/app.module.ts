@@ -12,6 +12,9 @@ import { ShipmentsModule } from './modules/shipments/shipments.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
 import { WorkflowsModule } from './modules/workflows/workflows.module';
 import { ReportsModule } from './modules/reports/reports.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-yet';
+import { RedisModule } from './modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -26,6 +29,17 @@ import { ReportsModule } from './modules/reports/reports.module';
       }),
       inject: [ConfigService],
     }),
+    CacheModule.registerAsync({
+      isGlobal: true,
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        store: redisStore,
+        host: configService.get<string>('REDIS_HOST') || 'localhost',
+        port: configService.get<number>('REDIS_PORT') || 6379,
+        ttl: 60000, // Default TTL 60 seconds
+      }),
+      inject: [ConfigService],
+    }),
     AuthModule,
     UsersModule,
     RolesModule,
@@ -35,6 +49,7 @@ import { ReportsModule } from './modules/reports/reports.module';
     InventoryModule,
     WorkflowsModule,
     ReportsModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

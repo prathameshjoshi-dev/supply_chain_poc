@@ -1,0 +1,22 @@
+import { Injectable, Inject } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import type { Cache } from 'cache-manager';
+
+@Injectable()
+export class RedisService {
+  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
+
+  async get(key: string): Promise<any> {
+    return this.cacheManager.get(key);
+  }
+
+  async set(key: string, value: any, ttl?: number): Promise<void> {
+    // Note: cache-manager v5+ uses milliseconds for ttl, but redisStore might differ.
+    // It is best to pass ttl if required.
+    await this.cacheManager.set(key, value, ttl);
+  }
+
+  async del(key: string): Promise<void> {
+    await this.cacheManager.del(key);
+  }
+}
