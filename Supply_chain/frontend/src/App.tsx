@@ -6,6 +6,7 @@ import { UsersPage } from './features/users/pages/UsersPage';
 import { NotificationsPage } from './features/notifications/pages/NotificationsPage';
 import { ShipmentsPage } from './features/shipments/pages/ShipmentsPage';
 import { CreateShipmentPage } from './features/shipments/pages/CreateShipmentPage';
+import { InventoryPage } from './features/inventory/pages/InventoryPage';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/users" replace />} />
           <Route path="/login" element={<AuthBackground><LoginPage /></AuthBackground>} />
+          <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/workflows" element={<div className="p-8 text-on-surface">Workflows coming soon</div>} />
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/shipments" element={<ShipmentsPage />} />
