@@ -9,6 +9,7 @@ import { Shipment, ShipmentSchema } from './schemas/shipment.schema';
     MongooseModule.forFeature([{ name: Shipment.name, schema: ShipmentSchema }])
   ],
   controllers: [ShipmentsController],
-  providers: [ShipmentsService]
+  providers: [ShipmentsService],
+  exports: [ShipmentsService]
 })
 export class ShipmentsModule {}

@@ -10,6 +10,7 @@ import { InventoryPage } from './features/inventory/pages/InventoryPage';
 import { WorkflowsPage } from './features/workflows/pages/WorkflowsPage';
 import { ReportsPage } from './features/reports/pages/ReportsPage';
 import { AiAssistantPage } from './features/ai/pages/AiAssistantPage';
+import { DashboardPage } from './features/dashboard/pages/DashboardPage';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
@@ -58,8 +59,9 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/users" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/login" element={<AuthBackground><LoginPage /></AuthBackground>} />
+          <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
           <Route path="/inventory" element={<PrivateRoute><InventoryPage /></PrivateRoute>} />
           <Route path="/workflows" element={<PrivateRoute><WorkflowsPage /></PrivateRoute>} />
           <Route path="/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
