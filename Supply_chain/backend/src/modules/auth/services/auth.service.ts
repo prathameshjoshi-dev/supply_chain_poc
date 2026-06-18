@@ -34,7 +34,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const payload = { email: user.email, sub: user._id, role: user.role };
+    const payload = { email: user.email, sub: user._id, role: user.role, name: user.name };
     return {
       accessToken: this.jwtService.sign(payload),
       refreshToken: this.jwtService.sign(payload, { expiresIn: '7d' }), // Example refresh token
@@ -62,7 +62,7 @@ export class AuthService {
   async refreshToken(token: string) {
     try {
       const payload = this.jwtService.verify(token);
-      const newPayload = { email: payload.email, sub: payload.sub, role: payload.role };
+      const newPayload = { email: payload.email, sub: payload.sub, role: payload.role, name: payload.name };
       return {
         accessToken: this.jwtService.sign(newPayload),
         expiresIn: 3600,
@@ -120,7 +120,7 @@ export class AuthService {
       throw new UnauthorizedException('User account is inactive');
     }
 
-    const jwtPayload = { email: user.email, sub: user._id, role: user.role };
+    const jwtPayload = { email: user.email, sub: user._id, role: user.role, name: user.name };
     return {
       accessToken: this.jwtService.sign(jwtPayload),
       refreshToken: this.jwtService.sign(jwtPayload, { expiresIn: '7d' }),

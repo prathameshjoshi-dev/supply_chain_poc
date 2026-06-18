@@ -16,6 +16,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
   const navigate = useNavigate();
   const location = useLocation();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const { user } = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
@@ -79,19 +80,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
             <span className="font-label-md text-label-md">AI Assistant</span>
           </a>
         </nav>
-        <div className="p-4 border-t border-border-subtle space-y-1">
-          <button 
-            onClick={() => setIsChangePasswordOpen(true)}
-            className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all rounded-lg group"
-          >
-            <span className="material-symbols-outlined">key</span>
-            <span className="font-label-md text-label-md">Change Password</span>
-          </button>
-          <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-all rounded-lg group">
-            <span className="material-symbols-outlined">logout</span>
-            <span className="font-label-md text-label-md">Logout</span>
-          </button>
-        </div>
       </aside>
 
       {/* Main Content Canvas */}
@@ -124,11 +112,42 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
               <span className="material-symbols-outlined">notifications</span>
               <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface-variant"></span>
             </button>
-            <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 flex items-center justify-center bg-primary/20 text-primary font-bold">
-              {user?.avatar ? (
-                 <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
-              ) : (
-                 <span className="uppercase">{user?.email?.charAt(0) || 'U'}</span>
+            <div className="relative">
+              <button 
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 flex items-center justify-center bg-primary/20 text-primary font-bold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-glass transition-transform active:scale-90"
+              >
+                {user?.avatar ? (
+                   <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                   <span className="uppercase">{user?.email?.charAt(0) || 'U'}</span>
+                )}
+              </button>
+              
+              {isProfileMenuOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setIsProfileMenuOpen(false)}></div>
+                  <div className="absolute right-0 mt-2 w-56 bg-surface-container-high shadow-xl rounded-xl border border-border-subtle z-50 overflow-hidden py-1">
+                    <div className="px-4 py-3 border-b border-border-subtle">
+                      <p className="text-sm font-label-md text-on-surface truncate">{user?.name || 'User'}</p>
+                      <p className="text-xs text-on-surface-variant truncate">{user?.email}</p>
+                    </div>
+                    <button 
+                      onClick={() => { setIsChangePasswordOpen(true); setIsProfileMenuOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-left"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">key</span>
+                      <span className="font-label-md text-label-md">Change Password</span>
+                    </button>
+                    <button 
+                      onClick={() => { handleLogout(); setIsProfileMenuOpen(false); }} 
+                      className="w-full flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-colors text-left border-t border-border-subtle"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">logout</span>
+                      <span className="font-label-md text-label-md">Logout</span>
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           </div>

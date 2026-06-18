@@ -12,7 +12,7 @@ const storedToken = localStorage.getItem('token');
 if (storedToken) {
   try {
     const payload: any = jwtDecode(storedToken);
-    initialUser = { _id: payload.sub, email: payload.email, role: payload.role };
+    initialUser = { _id: payload.sub, email: payload.email, role: payload.role, name: payload.name };
   } catch (e) {
     localStorage.removeItem('token');
   }
