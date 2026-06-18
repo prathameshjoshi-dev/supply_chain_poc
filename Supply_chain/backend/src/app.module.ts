@@ -12,6 +12,7 @@ import { ShipmentsModule } from './modules/shipments/shipments.module';
 import { InventoryModule } from './modules/inventory/inventory.module';
 import { WorkflowsModule } from './modules/workflows/workflows.module';
 import { ReportsModule } from './modules/reports/reports.module';
+import { EmailModule } from './modules/email/email.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { RedisModule } from './modules/redis/redis.module';
@@ -54,6 +55,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     RedisModule,
     AiModule,
     DashboardModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

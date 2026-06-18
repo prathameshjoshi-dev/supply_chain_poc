@@ -6,12 +6,14 @@ import { User, UserDocument } from '../../../database/schemas/user.schema';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { AuditLogsService } from '../../audit-logs/services/audit-logs.service';
+import { EmailService } from '../../email/email.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private auditLogsService: AuditLogsService,
+    private emailService: EmailService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -36,6 +38,9 @@ export class UsersService {
       entityId: saved.name,
       severity: 'success'
     });
+
+    // Send the invite email asynchronously
+    this.emailService.sendUserInvite(saved.email, saved.name, password).catch(console.error);
 
     const result: any = saved.toObject();
     delete result.passwordHash;
