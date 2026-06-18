@@ -32,41 +32,47 @@ export const Layout: React.FC<LayoutProps> = ({ children, pageTitle = 'Dashboard
           <p className="text-[10px] font-label-md text-on-surface-variant/60 uppercase tracking-widest mt-1">Enterprise Logistics</p>
         </div>
         <nav className="flex-1 px-3 space-y-1">
-          <button onClick={() => navigate('/dashboard')} className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.includes('dashboard') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}>
-            <span className={`material-symbols-outlined ${location.pathname.includes('dashboard') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>dashboard</span>
+          <button onClick={() => navigate('/dashboard')} className={`w-full flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.includes('dashboard') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`}>
+            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.includes('dashboard') ? { fontVariationSettings: "'FILL' 1" } : {}}>dashboard</span>
             <span className="font-label-md text-label-md">Dashboard</span>
           </button>
-          <button onClick={() => navigate('/users')} className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.includes('users') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}>
-            <span className={`material-symbols-outlined ${location.pathname.includes('users') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>group</span>
-            <span className="font-label-md text-label-md">Users</span>
-          </button>
-          <Link 
-            to="/reports" 
-            className={`flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.startsWith('/reports') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}
-          >
-            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/reports') ? { fontVariationSettings: "'FILL' 1" } : {}}>analytics</span>
-            <span className="font-label-md text-label-md">Reporting</span>
-          </Link>
+          {user?.role === 'admin' && (
+            <button onClick={() => navigate('/users')} className={`w-full flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.includes('users') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`}>
+              <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.includes('users') ? { fontVariationSettings: "'FILL' 1" } : {}}>group</span>
+              <span className="font-label-md text-label-md">Users</span>
+            </button>
+          )}
+          {['admin', 'manager'].includes(user?.role || '') && (
+            <Link 
+              to="/reports" 
+              className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/reports') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`}
+            >
+              <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/reports') ? { fontVariationSettings: "'FILL' 1" } : {}}>analytics</span>
+              <span className="font-label-md text-label-md">Reporting</span>
+            </Link>
+          )}
           <a 
-            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/inventory') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
+            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/inventory') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`} 
             href="/inventory"
           >
             <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/inventory') ? { fontVariationSettings: "'FILL' 1" } : {}}>inventory_2</span>
             <span className="font-label-md text-label-md">Inventory</span>
           </a>
-          <button onClick={() => navigate('/shipments')} className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-all rounded-lg group ${location.pathname.includes('shipments') ? 'text-on-surface bg-surface-variant' : 'text-on-surface-variant'}`}>
-            <span className={`material-symbols-outlined ${location.pathname.includes('shipments') ? 'text-primary' : 'text-primary/70 group-hover:text-primary'}`}>local_shipping</span>
+          <button onClick={() => navigate('/shipments')} className={`w-full flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.includes('shipments') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`}>
+            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.includes('shipments') ? { fontVariationSettings: "'FILL' 1" } : {}}>local_shipping</span>
             <span className="font-label-md text-label-md">Shipments</span>
           </button>
+          {['admin', 'manager'].includes(user?.role || '') && (
+            <a 
+              className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/workflows') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`} 
+              href="/workflows"
+            >
+              <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/workflows') ? { fontVariationSettings: "'FILL' 1" } : {}}>account_tree</span>
+              <span className="font-label-md text-label-md">Workflows</span>
+            </a>
+          )}
           <a 
-            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/workflows') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
-            href="/workflows"
-          >
-            <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/workflows') ? { fontVariationSettings: "'FILL' 1" } : {}}>account_tree</span>
-            <span className="font-label-md text-label-md">Workflows</span>
-          </a>
-          <a 
-            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/ai-assistant') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface rounded-lg group'}`} 
+            className={`flex items-center gap-3 px-4 py-3 transition-all ${location.pathname.startsWith('/ai-assistant') ? 'text-primary bg-primary/10 border-l-4 border-primary rounded-r-lg group' : 'text-white hover:bg-surface-variant hover:text-white rounded-lg group'}`} 
             href="/ai-assistant"
           >
             <span className="material-symbols-outlined group-hover:scale-110 transition-transform" style={location.pathname.startsWith('/ai-assistant') ? { fontVariationSettings: "'FILL' 1" } : {}}>smart_toy</span>

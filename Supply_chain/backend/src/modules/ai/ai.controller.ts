@@ -1,4 +1,6 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus, Get, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { AiService } from './ai.service';
 
 class ChatDto {
@@ -7,6 +9,7 @@ class ChatDto {
 }
 
 @Controller('api/v1/ai')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class AiController {
   constructor(private readonly aiService: AiService) {}
 

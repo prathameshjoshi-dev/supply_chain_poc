@@ -3,13 +3,16 @@ import { ShipmentsService } from '../services/shipments.service';
 import { GetShipmentsDto } from '../dto/get-shipments.dto';
 import { CreateShipmentDto } from '../dto/create-shipment.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../../common/guards/roles.guard';
+import { Roles } from '../../../common/decorators/roles.decorator';
 
 @Controller('api/v1/shipments')
-// @UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class ShipmentsController {
   constructor(private readonly shipmentsService: ShipmentsService) {}
 
   @Get()
+  @Roles('admin', 'manager', 'supervisor', 'viewer')
   async getShipments(@Query() query: GetShipmentsDto) {
     const result = await this.shipmentsService.getShipments(query);
     return {
@@ -25,6 +28,7 @@ export class ShipmentsController {
   }
 
   @Post()
+  @Roles('admin', 'manager', 'supervisor')
   async createShipment(@Body() dto: CreateShipmentDto) {
     const result = await this.shipmentsService.createShipment(dto);
     return {

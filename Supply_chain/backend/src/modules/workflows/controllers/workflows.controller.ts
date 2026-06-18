@@ -1,8 +1,13 @@
-import { Controller, Get, Post, Patch, Param, Query, Body, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Param, Query, Body, ValidationPipe, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../../common/guards/roles.guard';
+import { Roles } from '../../../common/decorators/roles.decorator';
 import { WorkflowsService } from '../services/workflows.service';
 import { CreateWorkflowDto } from '../dto/create-workflow.dto';
 
 @Controller('api/v1/workflows')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles('admin', 'manager')
 export class WorkflowsController {
   constructor(private readonly workflowsService: WorkflowsService) {}
 

@@ -4,10 +4,12 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { BulkActionDto } from '../dto/bulk-action.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../../common/guards/roles.guard';
+import { Roles } from '../../../common/decorators/roles.decorator';
 
 @Controller('api/v1/users')
-// Temporarily omitting @UseGuards(AuthGuard('jwt')) so you can test easily without tokens.
-// Uncomment to protect.
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles('admin')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

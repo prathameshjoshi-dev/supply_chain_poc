@@ -13,6 +13,9 @@
   --color-on-surface-variant: #bcc9ca;
   --color-outline: #869394;
   --color-primary-container: #59d8e0;
+  --color-secondary: #bec6e0;
+  --color-status-warning: #f59e0b;
+  --color-status-critical: #ef4444;
 
   --font-headline-md: "Outfit", sans-serif;
   --font-body-md: "Inter", sans-serif;

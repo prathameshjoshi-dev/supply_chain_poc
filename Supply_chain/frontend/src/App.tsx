@@ -43,12 +43,16 @@ const AuthBackground = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
-  const { token } = useSelector((state: RootState) => state.auth);
+const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles?: string[] }) => {
+  const { token, user } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
 
-  if (!token) {
+  if (!token || !user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;
@@ -63,19 +67,14 @@ function App() {
           <Route path="/login" element={<AuthBackground><LoginPage /></AuthBackground>} />
           <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
           <Route path="/inventory" element={<PrivateRoute><InventoryPage /></PrivateRoute>} />
-          <Route path="/workflows" element={<PrivateRoute><WorkflowsPage /></PrivateRoute>} />
-          <Route path="/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
+          <Route path="/workflows" element={<PrivateRoute allowedRoles={['admin', 'manager']}><WorkflowsPage /></PrivateRoute>} />
+          <Route path="/reports" element={<PrivateRoute allowedRoles={['admin', 'manager']}><ReportsPage /></PrivateRoute>} />
+          <Route path="/users" element={<PrivateRoute allowedRoles={['admin']}><UsersPage /></PrivateRoute>} />
+          <Route path="/notifications" element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
+          <Route path="/shipments" element={<PrivateRoute><ShipmentsPage /></PrivateRoute>} />
+          <Route path="/shipments/new" element={<PrivateRoute allowedRoles={['admin', 'manager', 'supervisor']}><CreateShipmentPage /></PrivateRoute>} />
           <Route path="/ai-assistant" element={<PrivateRoute><AiAssistantPage /></PrivateRoute>} />
-          <Route path="/notifications" element={<NotificationsPage />} />
-          <Route path="/shipments" element={<ShipmentsPage />} />
-          <Route path="/shipments/new" element={<CreateShipmentPage />} />
           <Route path="/reporting" element={<div className="p-8 text-on-surface">Reporting coming soon</div>} />
-          <Route path="/users" element={
-            <PrivateRoute>
-              <UsersPage />
-            </PrivateRoute>
-          } />
-          <Route path="/dashboard" element={<Navigate to="/users" replace />} />
         </Routes>
       </BrowserRouter>
     </Provider>

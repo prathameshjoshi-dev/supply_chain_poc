@@ -1,7 +1,12 @@
-import { Controller, Get, Post, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../../common/guards/roles.guard';
+import { Roles } from '../../../common/decorators/roles.decorator';
 import { ReportsService } from '../services/reports.service';
 
 @Controller('api/v1/reports')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles('admin', 'manager')
 export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 

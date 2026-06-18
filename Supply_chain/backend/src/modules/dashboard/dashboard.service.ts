@@ -57,7 +57,7 @@ export class DashboardService {
     // Format trends
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const generateTrend = (aggrData: any[]) => {
-      const trend = [];
+      const trend: {name: string, value: number}[] = [];
       for(let i=6; i>=0; i--) {
         const d = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
         const dateStr = d.toISOString().split('T')[0];
@@ -78,7 +78,7 @@ export class DashboardService {
       id: wf._id.toString(),
       type: 'workflow',
       message: `Workflow ${wf.title.substring(0, 20)}... was created.`,
-      time: wf.createdAt
+      time: (wf as any).createdAt
     }));
 
     return {
