@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type { RootState } from '../../../store';
 
 export interface ScheduledReport {
   _id: string;
@@ -19,7 +20,16 @@ export interface ReportDownload {
 
 export const reportsApi = createApi({
   reducerPath: 'reportsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/v1' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: '/api/v1',
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ['Reports'],
   endpoints: (builder) => ({
     getScheduledReports: builder.query<{success: boolean, data: ScheduledReport[]}, void>({
